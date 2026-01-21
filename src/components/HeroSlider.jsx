@@ -70,7 +70,7 @@ export default function HeroSlider() {
             <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
             {/* CONTENT */}
-            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start sm:mb-3">
+            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start sm:mt-10">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl text-white text-center sm:text-left mx-auto sm:mx-0">
                   <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mt-10">
