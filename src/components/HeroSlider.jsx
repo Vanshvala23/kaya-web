@@ -81,12 +81,12 @@ export default function HeroSlider() {
                     {slide.title}
                   </h1>
 
-                  <p className="text-sm sm:text-lg md:text-xl mb-3">
+                  <p className="text-sm sm:text-lg md:text-xl mt-5">
                     {slide.subtitle}
                   </p>
 
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-lg mb-4">
+                    <ul className="text-sm sm:text-lg mt-6">
                       {slide.meta.map((m, idx) => (
                         <li key={idx}>{m}</li>
                       ))}
