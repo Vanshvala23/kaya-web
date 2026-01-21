@@ -49,7 +49,7 @@ export default function HeroSlider() {
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* SLIDER CONTAINER */}
+      {/* Slider */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
@@ -63,36 +63,35 @@ export default function HeroSlider() {
               alt={slide.title}
               className="
                 w-full
-                h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh]
-                object-cover
+                h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]
+                object-cover object-center
               "
             />
 
-            {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10"></div>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
 
             {/* Content */}
             <div className="absolute inset-0 flex items-center">
-              <div className="max-w-2xl px-6 sm:px-8 md:px-12 text-white">
-                
+              <div className="max-w-2xl px-4 sm:px-6 md:px-10 text-white">
                 {/* Tag */}
-                <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-sm mb-4">
+                <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-2">
                   {slide.tag}
                 </span>
 
                 {/* Title */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-3 sm:mb-4">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-snug mb-2 sm:mb-3">
                   {slide.title}
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-sm sm:text-base md:text-lg mb-3">
+                <p className="text-xs sm:text-sm md:text-base mb-3">
                   {slide.subtitle}
                 </p>
 
-                {/* Meta Info */}
+                {/* Meta */}
                 {slide.meta.length > 0 && (
-                  <ul className="text-sm sm:text-base mb-4">
+                  <ul className="text-xs sm:text-sm mb-3">
                     {slide.meta.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
@@ -100,13 +99,12 @@ export default function HeroSlider() {
                 )}
 
                 {/* Button */}
-                <button className="group flex items-center gap-3 bg-white text-[#631529] px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                <button className="group flex items-center gap-2 sm:gap-3 bg-white text-[#631529] px-4 py-2 sm:px-5 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition text-xs sm:text-sm">
                   Know More
-                  <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition-transform">
-                    <ChevronRight size={16} />
+                  <span className="bg-[#631529] text-white p-1 sm:p-2 rounded-full group-hover:translate-x-1 transition-transform">
+                    <ChevronRight size={14} />
                   </span>
                 </button>
-
               </div>
             </div>
           </div>
@@ -114,19 +112,18 @@ export default function HeroSlider() {
       </div>
 
       {/* Arrows */}
-      <div className="absolute bottom-6 sm:bottom-10 right-6 sm:right-10 flex gap-4 z-20">
+      <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex gap-2 sm:gap-3 z-20">
         <button
           onClick={prevSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition"
         >
-          <ChevronLeft className="text-[#631529]" />
+          <ChevronLeft className="text-[#631529]" size={16} />
         </button>
-
         <button
           onClick={nextSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition"
         >
-          <ChevronRight className="text-[#631529]" />
+          <ChevronRight className="text-[#631529]" size={16} />
         </button>
       </div>
     </section>
