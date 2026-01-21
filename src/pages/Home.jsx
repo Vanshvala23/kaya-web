@@ -7,6 +7,7 @@ import Placements from "../components/Placements";
 import FindCenter from "../components/FindCenter";
 import BrandPlacements from "../components/BrandsPlacement";
 import GetStartedCTA from "../components/GetStartedCTA";
+import Footer from "../components/Footer";
 export default function Home() {
   return(
     <>
@@ -19,6 +20,7 @@ export default function Home() {
     <FindCenter />
     <BrandPlacements />
     <GetStartedCTA />
+    <Footer />
     </>
   );
 }
