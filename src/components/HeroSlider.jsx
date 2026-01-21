@@ -60,7 +60,11 @@ export default function HeroSlider() {
             <img
               src={slide.image}
               alt={slide.title}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="
+                absolute inset-0 w-full h-full object-cover
+                object-[center_20%] sm:object-center
+                scale-[1.05] sm:scale-100
+              "
             />
 
             {/* OVERLAY */}
@@ -71,23 +75,19 @@ export default function HeroSlider() {
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-2xl text-white">
 
-                  {/* TAG */}
                   <span className="inline-block bg-[#631529] px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm mb-3 sm:mb-4">
                     {slide.tag}
                   </span>
 
-                  {/* TITLE */}
                   <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl
                                  font-bold leading-tight mb-3 sm:mb-6">
                     {slide.title}
                   </h1>
 
-                  {/* SUBTITLE */}
                   <p className="text-sm sm:text-lg md:text-xl mb-3 sm:mb-4">
                     {slide.subtitle}
                   </p>
 
-                  {/* META */}
                   {slide.meta.length > 0 && (
                     <ul className="text-sm sm:text-lg mb-4 sm:mb-6">
                       {slide.meta.map((item, idx) => (
@@ -96,7 +96,6 @@ export default function HeroSlider() {
                     </ul>
                   )}
 
-                  {/* BUTTON */}
                   <button
                     className="group inline-flex items-center gap-3
                                bg-white text-[#631529]
@@ -119,18 +118,36 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ARROWS (Desktop unchanged, mobile tighter) */}
-      <div className="absolute bottom-4 sm:bottom-10 right-4 sm:right-10 flex gap-3 sm:gap-4 z-20">
+      {/* ARROWS */}
+      {/* Mobile: left & right center */}
+      <button
+        onClick={prevSlide}
+        className="sm:hidden absolute left-3 top-1/2 -translate-y-1/2
+                   bg-white/90 p-2 rounded-full z-20"
+      >
+        <ChevronLeft className="text-[#631529]" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="sm:hidden absolute right-3 top-1/2 -translate-y-1/2
+                   bg-white/90 p-2 rounded-full z-20"
+      >
+        <ChevronRight className="text-[#631529]" />
+      </button>
+
+      {/* Desktop: bottom-right (unchanged) */}
+      <div className="hidden sm:flex absolute bottom-10 right-10 gap-4 z-20">
         <button
           onClick={prevSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-3 rounded-full transition"
         >
           <ChevronLeft className="text-[#631529]" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-3 rounded-full transition"
         >
           <ChevronRight className="text-[#631529]" />
         </button>
