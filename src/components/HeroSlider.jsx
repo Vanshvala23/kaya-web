@@ -93,7 +93,7 @@ export default function HeroSlider() {
               src={slide.image}
               alt={slide.title}
               style={{ objectPosition: slide.position }}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover brightness-50"
             />
 
             {/* OVERLAY */}
