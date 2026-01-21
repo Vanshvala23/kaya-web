@@ -47,16 +47,42 @@ export default function Placements() {
   const [visible, setVisible] = useState(3);
   const [cardWidth, setCardWidth] = useState(320);
 
-  // Update visible cards & card width on resize
+  /* ---------- SWIPE SUPPORT ---------- */
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (distance > 50) next();
+    if (distance < -50) prev();
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+  /* ---------------------------------- */
+
+  /* ---------- RESPONSIVE CARDS ---------- */
   useEffect(() => {
     const handleResize = () => {
       const width = containerRef.current?.offsetWidth || 0;
+
       if (width < 640) {
         setVisible(1);
-        setCardWidth(width - 32); // full width with margin
+        setCardWidth(width - 32);
       } else if (width < 1024) {
         setVisible(2);
-        setCardWidth((width - 24) / 2); // gap = 24px
+        setCardWidth((width - 24) / 2);
       } else {
         setVisible(3);
         setCardWidth(320);
@@ -67,9 +93,23 @@ export default function Placements() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  /* ------------------------------------ */
 
-  const prev = () => setIndex(Math.max(index - 1, 0));
-  const next = () => setIndex(Math.min(index + 1, data.length - visible));
+  const prev = () => setIndex((p) => Math.max(p - 1, 0));
+  const next = () =>
+    setIndex((p) => Math.min(p + 1, data.length - visible));
+
+  /* ---------- AUTO SCROLL ---------- */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((p) =>
+        p >= data.length - visible ? 0 : p + 1
+      );
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [visible]);
+  /* -------------------------------- */
 
   return (
     <section className="py-24 bg-[#631529]">
@@ -112,9 +152,15 @@ export default function Placements() {
         </div>
 
         {/* SLIDER */}
-        <div className="overflow-hidden" ref={containerRef}>
+        <div
+          className="overflow-hidden"
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
-            className="flex gap-6 transition-transform duration-700"
+            className="flex gap-6 transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${index * (cardWidth + 24)}px)` }}
           >
             {data.map((item, i) => (
