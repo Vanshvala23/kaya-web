@@ -15,7 +15,7 @@ const slides = [
   },
   {
     image: bridal2,
-    position: "50% 30%", // face slightly lower
+    position: "50% 25%", // face slightly lower
     tag: "Professional Courses",
     title: "Advanced Makeup Artist Program",
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
