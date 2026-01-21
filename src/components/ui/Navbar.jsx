@@ -35,12 +35,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
         {/* Logo */}
-        <NavLink
-          to="/"
-          className="text-2xl font-bold text-white tracking-wide"
-        >
+        <NavLink to="/" className="text-2xl font-bold text-white">
           OraneStyle
         </NavLink>
 
@@ -55,49 +51,59 @@ export default function Navbar() {
                 }
               >
                 {item.name}
-                {item.dropdown && (
-                  <ChevronDown size={16} className="mt-[2px]" />
-                )}
-                <span
-                  className="
-                    absolute left-0 -bottom-1
-                    h-[2px] w-0
-                    bg-[#d4af37]
-                    transition-all duration-300
-                    group-hover:w-full
-                  "
-                />
+                {item.dropdown && <ChevronDown size={16} />}
+                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#d4af37] transition-all duration-300 group-hover:w-full" />
               </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Button */}
         <button
-          className="md:hidden text-white p-2 rounded-lg hover:bg-white/20 transition"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden text-white p-2"
+          onClick={() => setMobileOpen(true)}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={26} />
         </button>
       </nav>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-[#631529] text-white px-6 py-4 space-y-4">
+      {/* OVERLAY */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* RIGHT SIDE MOBILE MENU */}
+      <aside
+        className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50
+        transform transition-transform duration-300
+        ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
+      >
+        {/* Close Button */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
+          <span className="text-lg font-semibold">Menu</span>
+          <button onClick={() => setMobileOpen(false)}>
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Links */}
+        <div className="px-6 py-6 space-y-4">
           {navItems.map((item, index) => (
-            <div key={index} className="flex flex-col">
-              <NavLink
-                to={item.path}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between py-2 text-white font-medium hover:text-[#d4af37] transition"
-              >
-                {item.name}
-                {item.dropdown && <ChevronDown size={16} />}
-              </NavLink>
-            </div>
+            <NavLink
+              key={index}
+              to={item.path}
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-between py-2 text-white font-medium hover:text-[#d4af37] transition"
+            >
+              {item.name}
+              {item.dropdown && <ChevronDown size={16} />}
+            </NavLink>
           ))}
         </div>
-      )}
+      </aside>
     </header>
   );
 }
