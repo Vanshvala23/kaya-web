@@ -24,7 +24,7 @@ const slides = [
     tag: "Engage, Learn, & Grow",
     title: "Learn From Anywhere & Anytime",
     subtitle:
-      "Explore a World of Learning with Our Online Courses Hub. Find Your Next Learning Adventure Today.",
+      "Explore a World of Learning with Our Online Courses Hub.",
     meta: [],
   },
 ];
@@ -33,71 +33,65 @@ export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
+    const timer = setInterval(
+      () => setCurrent((p) => (p + 1) % slides.length),
+      5000
+    );
     return () => clearInterval(timer);
   }, []);
 
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-  };
-
   return (
     <section className="relative w-full overflow-hidden">
-      {/* SLIDER CONTAINER */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((slide, index) => (
-          <div key={index} className="min-w-full relative flex items-center justify-center">
-            {/* Background Image */}
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className="
+              relative min-w-full
+              h-[60vh] sm:h-[70vh] lg:h-[85vh]
+            "
+          >
+            {/* IMAGE — PERFECT CENTER */}
             <img
               src={slide.image}
               alt={slide.title}
               className="
-                w-full
-                h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]
-                object-contain sm:object-cover
+                absolute inset-0
+                w-full h-full
+                object-cover
                 object-center
+                block
               "
             />
 
-            {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/10"></div>
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-black/50" />
 
-            {/* Content */}
-            <div className="absolute z-10 max-w-7xl px-6 w-full text-white flex items-center h-full">
-              <div className="max-w-2xl">
-                <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-sm mb-4">
+            {/* CONTENT */}
+            <div className="relative z-10 h-full flex items-center">
+              <div className="max-w-7xl mx-auto px-6 text-white max-w-xl">
+                <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs mb-3">
                   {slide.tag}
                 </span>
 
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 sm:mb-6">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4">
                   {slide.title}
                 </h1>
 
-                <p className="text-sm sm:text-base md:text-lg mb-4">{slide.subtitle}</p>
+                <p className="text-sm sm:text-lg mb-4">
+                  {slide.subtitle}
+                </p>
 
-                {slide.meta.length > 0 && (
-                  <ul className="text-sm sm:text-base mb-6">
-                    {slide.meta.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                )}
+                {slide.meta.map((m, idx) => (
+                  <p key={idx} className="text-sm mb-4">{m}</p>
+                ))}
 
-                <button className="group flex items-center gap-3 bg-white text-[#631529] px-5 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                <button className="flex items-center gap-2 bg-white text-[#631529] px-5 py-3 rounded-full font-semibold">
                   Know More
-                  <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition-transform">
-                    <ChevronRight size={16} />
-                  </span>
+                  <ChevronRight size={16} />
                 </button>
               </div>
             </div>
@@ -105,18 +99,20 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ARROWS */}
-      <div className="absolute bottom-6 sm:bottom-10 right-6 sm:right-10 flex gap-4 z-20">
+      {/* CONTROLS */}
+      <div className="absolute bottom-6 right-6 flex gap-3 z-20">
         <button
-          onClick={prevSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          onClick={() =>
+            setCurrent((p) => (p - 1 + slides.length) % slides.length)
+          }
+          className="bg-white p-3 rounded-full"
         >
           <ChevronLeft className="text-[#631529]" />
         </button>
 
         <button
-          onClick={nextSlide}
-          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
+          onClick={() => setCurrent((p) => (p + 1) % slides.length)}
+          className="bg-white p-3 rounded-full"
         >
           <ChevronRight className="text-[#631529]" />
         </button>
