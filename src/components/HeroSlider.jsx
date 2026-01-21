@@ -23,7 +23,7 @@ const slides = [
   },
   {
     image: bridal3,
-    position: "90% 50%",
+    position: "90% 25%",
     tag: "Engage, Learn, & Grow",
     title: "Learn From Anywhere & Anytime",
     subtitle:
