@@ -68,7 +68,7 @@ export default function HeroSlider() {
             />
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
+            <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
             {/* CONTENT */}
             <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
