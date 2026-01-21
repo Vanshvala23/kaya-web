@@ -73,20 +73,20 @@ export default function HeroSlider() {
             <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl text-white text-center sm:text-left mx-auto sm:mx-0">
-                  <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mt-19">
+                  <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-19">
                     {slide.tag}
                   </span>
 
-                  <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-11">
+                  <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-11">
                     {slide.title}
                   </h1>
 
-                  <p className="text-sm sm:text-lg md:text-xl mt-11">
+                  <p className="text-sm sm:text-lg md:text-xl mb-11">
                     {slide.subtitle}
                   </p>
 
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-lg mt-12">
+                    <ul className="text-sm sm:text-lg mb-12">
                       {slide.meta.map((m, idx) => (
                         <li key={idx}>{m}</li>
                       ))}
@@ -94,7 +94,7 @@ export default function HeroSlider() {
                   )}
 
                   <div className="flex justify-center sm:justify-start">
-                    <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-5 py-2.5 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition sm:mt-14">
+                    <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-5 py-2.5 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition sm:mb-14">
                       Know More
                       <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition">
                         <ChevronRight size={16} />
