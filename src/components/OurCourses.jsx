@@ -13,17 +13,19 @@ const courses = [
   { title: "Makeup Courses", image: c4 },
 ];
 
+const CARD_WIDTH = 320; // Keep desktop same
 const AUTO_DELAY = 3000;
 
 export default function OurCourses() {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
-  const [visibleCards, setVisibleCards] = useState(4);
+
+  const maxIndex = courses.length - 3; // desktop
 
   const startAutoPlay = () => {
     stopAutoPlay();
     intervalRef.current = setInterval(() => {
-      setIndex((i) => (i >= courses.length - visibleCards ? 0 : i + 1));
+      setIndex((i) => (i >= maxIndex ? 0 : i + 1));
     }, AUTO_DELAY);
   };
 
@@ -35,31 +37,17 @@ export default function OurCourses() {
   };
 
   const prev = () => {
-    setIndex((i) => (i === 0 ? courses.length - visibleCards : i - 1));
+    setIndex((i) => (i === 0 ? maxIndex : i - 1));
   };
 
   const next = () => {
-    setIndex((i) => (i >= courses.length - visibleCards ? 0 : i + 1));
+    setIndex((i) => (i >= maxIndex ? 0 : i + 1));
   };
-
-  // Update visibleCards based on screen width
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) setVisibleCards(4); // lg
-      else if (window.innerWidth >= 768) setVisibleCards(3); // md
-      else if (window.innerWidth >= 640) setVisibleCards(2); // sm
-      else setVisibleCards(1); // xs/mobile
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     startAutoPlay();
     return stopAutoPlay;
-  }, [visibleCards]);
+  }, []);
 
   return (
     <section className="py-20 bg-white">
@@ -84,7 +72,7 @@ export default function OurCourses() {
           </div>
 
           <a href="#" className="text-[#631529] font-semibold hover:underline">
-            View All Programs →
+            View All Programs → 
           </a>
         </div>
 
@@ -98,14 +86,13 @@ export default function OurCourses() {
             <div
               className="flex gap-6 transition-transform duration-700 ease-in-out"
               style={{
-                transform: `translateX(-${(index * 100) / visibleCards}%)`,
-                width: `${(courses.length * 100) / visibleCards}%`,
+                transform: `translateX(-${index * CARD_WIDTH}px)`,
               }}
             >
               {courses.map((course, i) => (
                 <div
                   key={i}
-                  className={`flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4`}
+                  className="min-w-[300px] sm:min-w-[320px] flex-shrink-0"
                 >
                   <div className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
                     <img
@@ -125,7 +112,7 @@ export default function OurCourses() {
           </div>
 
           {/* Controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 right-0 flex gap-3 z-10">
+          <div className="absolute -top-20 right-0 flex gap-3">
             <button
               onClick={prev}
               className="bg-gray-200 hover:bg-[#631529] hover:text-white p-3 rounded-full transition"
@@ -141,6 +128,7 @@ export default function OurCourses() {
             </button>
           </div>
         </div>
+
       </div>
     </section>
   );
