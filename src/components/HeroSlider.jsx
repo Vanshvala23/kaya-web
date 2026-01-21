@@ -7,6 +7,7 @@ import bridal3 from "../assets/bridal3.jpg";
 const slides = [
   {
     image: bridal1,
+    position: "50% 25%", // face near top-center
     tag: "Orane Goes Online!",
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
@@ -14,6 +15,7 @@ const slides = [
   },
   {
     image: bridal2,
+    position: "50% 30%", // face slightly lower
     tag: "Professional Courses",
     title: "Advanced Makeup Artist Program",
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
@@ -21,6 +23,7 @@ const slides = [
   },
   {
     image: bridal3,
+    position: "50% 50%", // center
     tag: "Engage, Learn & Grow",
     title: "Learn From Anywhere & Anytime",
     subtitle:
@@ -33,39 +36,40 @@ export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    const timer = setInterval(
+      () => setCurrent((p) => (p + 1) % slides.length),
+      5000
+    );
     return () => clearInterval(timer);
   }, []);
 
+  const prev = () =>
+    setCurrent((p) => (p - 1 + slides.length) % slides.length);
+  const next = () => setCurrent((p) => (p + 1) % slides.length);
+
   return (
     <section className="relative w-full overflow-hidden bg-black">
-      {/* SLIDES */}
+      {/* SLIDER */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((slide, index) => (
+        {slides.map((slide, i) => (
           <div
-            key={index}
+            key={i}
             className="
               min-w-full relative
-              h-[42vh]       /* MOBILE */
-              sm:h-[60vh]    /* TABLET */
-              lg:h-[85vh]    /* DESKTOP */
+              h-[42vh]
+              sm:h-[60vh]
+              lg:h-[85vh]
             "
           >
             {/* IMAGE */}
             <img
               src={slide.image}
               alt={slide.title}
-              className="
-                absolute inset-0
-                w-full h-full
-                object-cover
-                object-top sm:object-center
-              "
+              style={{ objectPosition: slide.position }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
 
             {/* OVERLAY */}
@@ -73,32 +77,57 @@ export default function HeroSlider() {
 
             {/* CONTENT */}
             <div className="absolute inset-0 flex items-center">
-              <div className="max-w-7xl mx-auto px-6 w-full">
+              <div className="max-w-7xl mx-auto px-5 sm:px-6 w-full">
                 <div className="max-w-xl text-white">
 
-                  <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-3">
+                  {/* TAG */}
+                  <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-3">
                     {slide.tag}
                   </span>
 
+                  {/* TITLE */}
                   <h1 className="text-xl sm:text-3xl lg:text-5xl font-bold leading-tight mb-3">
                     {slide.title}
                   </h1>
 
-                  <p className="text-sm sm:text-base lg:text-lg mb-4">
+                  {/* SUBTITLE */}
+                  <p className="text-sm sm:text-base lg:text-lg mb-4 text-white/90">
                     {slide.subtitle}
                   </p>
 
+                  {/* META */}
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-base mb-4">
-                      {slide.meta.map((item, i) => (
-                        <li key={i}>{item}</li>
+                    <ul className="text-sm sm:text-base mb-5">
+                      {slide.meta.map((m, idx) => (
+                        <li key={idx}>{m}</li>
                       ))}
                     </ul>
                   )}
 
-                  <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-5 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition">
+                  {/* BUTTON (MEDIUM ON MOBILE) */}
+                  <button
+                    className="
+                      group inline-flex items-center gap-3
+                      bg-white text-[#631529]
+                      px-5 py-2.5
+                      sm:px-6 sm:py-3
+                      rounded-full
+                      text-sm sm:text-base font-semibold
+                      hover:bg-gray-100
+                      transition
+                    "
+                  >
                     Know More
-                    <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition">
+                    <span
+                      className="
+                        bg-[#631529] text-white
+                        w-8 h-8 sm:w-9 sm:h-9
+                        flex items-center justify-center
+                        rounded-full
+                        group-hover:translate-x-1
+                        transition
+                      "
+                    >
                       <ChevronRight size={16} />
                     </span>
                   </button>
@@ -110,12 +139,18 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ARROWS */}
+      {/* CONTROLS */}
       <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 flex gap-3 z-20">
-        <button className="bg-white/90 p-2 rounded-full">
+        <button
+          onClick={prev}
+          className="bg-white/90 p-2 rounded-full"
+        >
           <ChevronLeft className="text-[#631529]" />
         </button>
-        <button className="bg-white/90 p-2 rounded-full">
+        <button
+          onClick={next}
+          className="bg-white/90 p-2 rounded-full"
+        >
           <ChevronRight className="text-[#631529]" />
         </button>
       </div>
