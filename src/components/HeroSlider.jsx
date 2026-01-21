@@ -56,19 +56,19 @@ export default function HeroSlider() {
       >
         {slides.map((slide, index) => (
           <div key={index} className="min-w-full relative h-full">
-            {/* IMAGE */}
+            {/* IMAGE — FIXED */}
             <img
               src={slide.image}
               alt={slide.title}
               className="
-                absolute inset-0 w-full h-full object-cover
-                object-[center_20%] sm:object-center
-                scale-[1.05] sm:scale-100
+                absolute inset-0 w-full h-full
+                object-cover
+                object-center
               "
             />
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
             {/* CONTENT */}
             <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
@@ -132,7 +132,7 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* MOBILE ARROWS (center sides) */}
+      {/* MOBILE ARROWS */}
       <button
         onClick={prevSlide}
         className="sm:hidden absolute left-3 top-1/2 -translate-y-1/2
@@ -149,7 +149,7 @@ export default function HeroSlider() {
         <ChevronRight className="text-[#631529]" />
       </button>
 
-      {/* DESKTOP ARROWS (unchanged) */}
+      {/* DESKTOP ARROWS — UNCHANGED */}
       <div className="hidden sm:flex absolute bottom-10 right-10 gap-4 z-20">
         <button
           onClick={prevSlide}
