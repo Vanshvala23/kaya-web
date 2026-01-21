@@ -18,13 +18,12 @@ const AUTO_DELAY = 3000;
 export default function OurCourses() {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
-
-  const total = courses.length;
+  const [visibleCards, setVisibleCards] = useState(4);
 
   const startAutoPlay = () => {
     stopAutoPlay();
     intervalRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % total);
+      setIndex((i) => (i >= courses.length - visibleCards ? 0 : i + 1));
     }, AUTO_DELAY);
   };
 
@@ -35,47 +34,61 @@ export default function OurCourses() {
     }
   };
 
-  const prev = () =>
-    setIndex((i) => (i === 0 ? total - 1 : i - 1));
-  const next = () =>
-    setIndex((i) => (i === total - 1 ? 0 : i + 1));
+  const prev = () => {
+    setIndex((i) => (i === 0 ? courses.length - visibleCards : i - 1));
+  };
+
+  const next = () => {
+    setIndex((i) => (i >= courses.length - visibleCards ? 0 : i + 1));
+  };
+
+  // Update visibleCards based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setVisibleCards(4); // lg
+      else if (window.innerWidth >= 768) setVisibleCards(3); // md
+      else if (window.innerWidth >= 640) setVisibleCards(2); // sm
+      else setVisibleCards(1); // xs/mobile
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     startAutoPlay();
     return stopAutoPlay;
-  }, []);
+  }, [visibleCards]);
 
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* HEADER */}
+        {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6">
           <div>
             <span className="inline-block bg-[#631529] text-white text-xs px-4 py-1 rounded-full mb-4">
               OUR COURSES
             </span>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
               Tailored Courses for Every Beauty Aspirant
             </h2>
 
-            <p className="text-gray-600 max-w-3xl leading-relaxed text-sm sm:text-base">
+            <p className="text-gray-600 max-w-3xl leading-relaxed">
               Finding a beauty course is easy at Orane International – with over
               100 beauty courses across cosmetology, aesthetics, hair, makeup,
               nail art and more.
             </p>
           </div>
 
-          <a
-            href="#"
-            className="text-[#631529] font-semibold hover:underline self-start lg:self-auto"
-          >
+          <a href="#" className="text-[#631529] font-semibold hover:underline">
             View All Programs →
           </a>
         </div>
 
-        {/* CAROUSEL */}
+        {/* Carousel */}
         <div
           className="relative"
           onMouseEnter={stopAutoPlay}
@@ -83,40 +96,27 @@ export default function OurCourses() {
         >
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-700 ease-in-out"
+              className="flex gap-6 transition-transform duration-700 ease-in-out"
               style={{
-                transform: `translateX(-${index * 100}%)`,
+                transform: `translateX(-${(index * 100) / visibleCards}%)`,
+                width: `${(courses.length * 100) / visibleCards}%`,
               }}
             >
               {courses.map((course, i) => (
                 <div
                   key={i}
-                  className="
-                    min-w-full
-                    sm:min-w-[50%]
-                    md:min-w-[33.333%]
-                    lg:min-w-[25%]
-                    px-3
-                  "
+                  className={`flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4`}
                 >
                   <div className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
                     <img
                       src={course.image}
                       alt={course.title}
-                      className="
-                        h-56
-                        sm:h-64
-                        md:h-72
-                        w-full
-                        object-cover
-                        transition-transform duration-500
-                        group-hover:scale-105
-                      "
+                      className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition" />
                   </div>
 
-                  <h3 className="mt-5 text-base sm:text-lg font-semibold text-center">
+                  <h3 className="mt-5 text-lg font-semibold text-center">
                     {course.title}
                   </h3>
                 </div>
@@ -124,39 +124,23 @@ export default function OurCourses() {
             </div>
           </div>
 
-          {/* LEFT CONTROL */}
-          <button
-            onClick={prev}
-            className="
-              absolute left-0 sm:-left-4
-              top-1/2 -translate-y-1/2
-              bg-gray-200 hover:bg-[#631529] hover:text-white
-              p-2 sm:p-3
-              rounded-full
-              transition
-              z-10
-            "
-          >
-            <ChevronLeft />
-          </button>
+          {/* Controls */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 flex gap-3 z-10">
+            <button
+              onClick={prev}
+              className="bg-gray-200 hover:bg-[#631529] hover:text-white p-3 rounded-full transition"
+            >
+              <ChevronLeft />
+            </button>
 
-          {/* RIGHT CONTROL */}
-          <button
-            onClick={next}
-            className="
-              absolute right-0 sm:-right-4
-              top-1/2 -translate-y-1/2
-              bg-gray-200 hover:bg-[#631529] hover:text-white
-              p-2 sm:p-3
-              rounded-full
-              transition
-              z-10
-            "
-          >
-            <ChevronRight />
-          </button>
+            <button
+              onClick={next}
+              className="bg-gray-200 hover:bg-[#631529] hover:text-white p-3 rounded-full transition"
+            >
+              <ChevronRight />
+            </button>
+          </div>
         </div>
-
       </div>
     </section>
   );
