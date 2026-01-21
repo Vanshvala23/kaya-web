@@ -7,7 +7,7 @@ import bridal3 from "../assets/bridal3.jpg";
 const slides = [
   {
     image: bridal1,
-    position: "85% 30%", // 👈 face slightly upper
+    position: "85% 30%",
     tag: "Orane Goes Online!",
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
@@ -23,7 +23,7 @@ const slides = [
   },
   {
     image: bridal3,
-    position: "90% 50%", // normal center
+    position: "90% 50%",
     tag: "Engage, Learn, & Grow",
     title: "Learn From Anywhere & Anytime",
     subtitle:
@@ -58,7 +58,7 @@ export default function HeroSlider() {
       >
         {slides.map((slide, i) => (
           <div key={i} className="min-w-full relative h-full">
-            {/* IMAGE — FACE SAFE */}
+            {/* IMAGE */}
             <img
               src={slide.image}
               alt={slide.title}
@@ -70,23 +70,23 @@ export default function HeroSlider() {
             <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
             {/* CONTENT */}
-            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start sm:mt-10">
+            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
-                <div className="max-w-xl text-white text-center sm:text-left mx-auto sm:mx-0">
-                  <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mt-10">
+                <div className="max-w-xl mx-auto sm:mx-0 text-white text-center sm:text-left">
+                  <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-4">
                     {slide.tag}
                   </span>
 
-                  <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
+                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
                     {slide.title}
                   </h1>
 
-                  <p className="text-sm sm:text-lg md:text-xl mb-3">
+                  <p className="text-sm sm:text-lg md:text-xl mb-4">
                     {slide.subtitle}
                   </p>
 
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-lg mb-4">
+                    <ul className="text-sm sm:text-lg mb-6">
                       {slide.meta.map((m, idx) => (
                         <li key={idx}>{m}</li>
                       ))}
@@ -94,7 +94,7 @@ export default function HeroSlider() {
                   )}
 
                   <div className="flex justify-center sm:justify-start">
-                    <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-5 py-2.5 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition">
+                    <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-6 py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition">
                       Know More
                       <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition">
                         <ChevronRight size={16} />
