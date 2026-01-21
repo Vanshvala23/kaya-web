@@ -38,7 +38,7 @@ export default function Navbar() {
             <li className="hover:text-gray-200 transition">Career <ChevronDown className="inline-block ml-1" /></li>
             <li className="hover:text-gray-200 transition">Blog <ChevronDown className="inline-block ml-1" /></li>
             <li className="hover:text-gray-200 transition">Contact Us</li>
-            <li className="hover:text-gray-200 transition">Testimonal</li>
+            <li className="hover:text-gray-200 transition">Testimonals</li>
         </ul>
       </nav>
     </header>
