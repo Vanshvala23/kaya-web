@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import bridal1 from "../assets/bridal1.jpg";
 import bridal2 from "../assets/bridal2.jpg";
@@ -34,6 +34,8 @@ const slides = [
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(
@@ -45,11 +47,39 @@ export default function HeroSlider() {
 
   const prevSlide = () =>
     setCurrent((p) => (p - 1 + slides.length) % slides.length);
+
   const nextSlide = () =>
     setCurrent((p) => (p + 1) % slides.length);
 
+  /* ---------- SWIPE HANDLERS ---------- */
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (distance > 50) nextSlide();      // swipe left
+    if (distance < -50) prevSlide();     // swipe right
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+  /* ---------------------------------- */
+
   return (
-    <section className="relative w-full overflow-hidden">
+    <section
+      className="relative w-full overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* SLIDER */}
       <div
         className="flex transition-transform duration-700 ease-in-out
@@ -69,15 +99,12 @@ export default function HeroSlider() {
             {/* OVERLAY */}
             <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
-            {/* CONTENT WRAPPER */}
-            <div
-              className="
-                relative z-10 h-full flex
-                items-end pb-10
-                sm:items-center sm:pb-0
-                sm:justify-start
-              "
-            >
+            {/* CONTENT */}
+            <div className="
+              relative z-10 h-full flex
+              items-end pb-10
+              sm:items-center sm:pb-0 sm:justify-start
+            ">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl mx-auto sm:mx-0 text-white text-center sm:text-left">
                   <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-3">
