@@ -36,6 +36,7 @@ export default function HeroSlider() {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
+
     return () => clearInterval(timer);
   }, []);
 
@@ -49,14 +50,13 @@ export default function HeroSlider() {
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Slider */}
+      {/* SLIDER CONTAINER */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide, index) => (
-          <div key={index} className="min-w-full relative">
-
+          <div key={index} className="min-w-full relative flex items-center justify-center">
             {/* Background Image */}
             <img
               src={slide.image}
@@ -64,45 +64,39 @@ export default function HeroSlider() {
               className="
                 w-full
                 h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]
-                object-cover object-center
+                object-contain sm:object-cover
+                object-center
               "
             />
 
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
+            {/* Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/10"></div>
 
             {/* Content */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="max-w-2xl px-4 sm:px-6 md:px-10 text-white">
-                {/* Tag */}
-                <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-2">
+            <div className="absolute z-10 max-w-7xl px-6 w-full text-white flex items-center h-full">
+              <div className="max-w-2xl">
+                <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-sm mb-4">
                   {slide.tag}
                 </span>
 
-                {/* Title */}
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-snug mb-2 sm:mb-3">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 sm:mb-6">
                   {slide.title}
                 </h1>
 
-                {/* Subtitle */}
-                <p className="text-xs sm:text-sm md:text-base mb-3">
-                  {slide.subtitle}
-                </p>
+                <p className="text-sm sm:text-base md:text-lg mb-4">{slide.subtitle}</p>
 
-                {/* Meta */}
                 {slide.meta.length > 0 && (
-                  <ul className="text-xs sm:text-sm mb-3">
+                  <ul className="text-sm sm:text-base mb-6">
                     {slide.meta.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
                 )}
 
-                {/* Button */}
-                <button className="group flex items-center gap-2 sm:gap-3 bg-white text-[#631529] px-4 py-2 sm:px-5 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition text-xs sm:text-sm">
+                <button className="group flex items-center gap-3 bg-white text-[#631529] px-5 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-100 transition">
                   Know More
-                  <span className="bg-[#631529] text-white p-1 sm:p-2 rounded-full group-hover:translate-x-1 transition-transform">
-                    <ChevronRight size={14} />
+                  <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition-transform">
+                    <ChevronRight size={16} />
                   </span>
                 </button>
               </div>
@@ -111,19 +105,20 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* Arrows */}
-      <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex gap-2 sm:gap-3 z-20">
+      {/* ARROWS */}
+      <div className="absolute bottom-6 sm:bottom-10 right-6 sm:right-10 flex gap-4 z-20">
         <button
           onClick={prevSlide}
-          className="bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
         >
-          <ChevronLeft className="text-[#631529]" size={16} />
+          <ChevronLeft className="text-[#631529]" />
         </button>
+
         <button
           onClick={nextSlide}
-          className="bg-white/90 hover:bg-white p-1.5 sm:p-2 rounded-full transition"
+          className="bg-white/90 hover:bg-white p-2 sm:p-3 rounded-full transition"
         >
-          <ChevronRight className="text-[#631529]" size={16} />
+          <ChevronRight className="text-[#631529]" />
         </button>
       </div>
     </section>
