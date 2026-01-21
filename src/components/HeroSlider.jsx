@@ -7,7 +7,7 @@ import bridal3 from "../assets/bridal3.jpg";
 const slides = [
   {
     image: bridal1,
-    position: "50% 30%", // 👈 face slightly upper
+    position: "25% 30%", // 👈 face slightly upper
     tag: "Orane Goes Online!",
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
