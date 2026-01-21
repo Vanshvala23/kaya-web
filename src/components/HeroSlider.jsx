@@ -51,7 +51,7 @@ export default function HeroSlider() {
   const nextSlide = () =>
     setCurrent((p) => (p + 1) % slides.length);
 
-  /* ---------- SWIPE HANDLERS ---------- */
+  /* ---------- SWIPE SUPPORT ---------- */
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -65,8 +65,8 @@ export default function HeroSlider() {
 
     const distance = touchStartX.current - touchEndX.current;
 
-    if (distance > 50) nextSlide();      // swipe left
-    if (distance < -50) prevSlide();     // swipe right
+    if (distance > 50) nextSlide();
+    if (distance < -50) prevSlide();
 
     touchStartX.current = null;
     touchEndX.current = null;
@@ -88,23 +88,28 @@ export default function HeroSlider() {
       >
         {slides.map((slide, i) => (
           <div key={i} className="min-w-full relative h-full">
-            {/* IMAGE */}
+            {/* IMAGE (BRIGHTER) */}
             <img
               src={slide.image}
               alt={slide.title}
               style={{ objectPosition: slide.position }}
-              className="absolute inset-0 w-full h-full object-cover filter brightness-100"
+              className="
+                absolute inset-0 w-full h-full object-cover
+                brightness-125 contrast-105
+              "
             />
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
+            <div className="absolute inset-0 bg-black/50 sm:bg-gradient-to-r sm:from-black/70 sm:via-black/40 sm:to-black/10" />
 
             {/* CONTENT */}
-            <div className="
-              relative z-10 h-full flex
-              items-end pb-10
-              sm:items-center sm:pb-0 sm:justify-start
-            ">
+            <div
+              className="
+                relative z-10 h-full flex
+                items-end pb-10
+                sm:items-center sm:pb-0 sm:justify-start
+              "
+            >
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl mx-auto sm:mx-0 text-white text-center sm:text-left">
                   <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-3">
