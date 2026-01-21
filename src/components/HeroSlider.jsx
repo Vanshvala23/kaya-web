@@ -53,7 +53,7 @@ export default function HeroSlider() {
       {/* SLIDER */}
       <div
         className="flex transition-transform duration-700 ease-in-out
-                   h-[65vh] sm:h-[75vh] lg:h-screen"
+                   h-[70vh] sm:h-[80vh] lg:h-screen"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide, i) => (
@@ -69,11 +69,18 @@ export default function HeroSlider() {
             {/* OVERLAY */}
             <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
-            {/* CONTENT */}
-            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
+            {/* CONTENT WRAPPER */}
+            <div
+              className="
+                relative z-10 h-full flex
+                items-end pb-10
+                sm:items-center sm:pb-0
+                sm:justify-start
+              "
+            >
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl mx-auto sm:mx-0 text-white text-center sm:text-left">
-                  <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-4">
+                  <span className="inline-block bg-[#631529] px-4 py-1 rounded-full text-xs sm:text-sm mb-3">
                     {slide.tag}
                   </span>
 
@@ -86,7 +93,7 @@ export default function HeroSlider() {
                   </p>
 
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-lg mb-6">
+                    <ul className="text-sm sm:text-lg mb-5">
                       {slide.meta.map((m, idx) => (
                         <li key={idx}>{m}</li>
                       ))}
