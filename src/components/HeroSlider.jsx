@@ -51,7 +51,7 @@ export default function HeroSlider() {
       {/* SLIDER */}
       <div
         className="flex transition-transform duration-700 ease-in-out
-                   h-[60vh] sm:h-[75vh] lg:h-screen"
+                   h-[65vh] sm:h-[75vh] lg:h-screen"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide, index) => (
@@ -62,54 +62,68 @@ export default function HeroSlider() {
               alt={slide.title}
               className="
                 absolute inset-0 w-full h-full object-cover
-                object-[center_50%] sm:object-center
+                object-[center_20%] sm:object-center
                 scale-[1.05] sm:scale-100
               "
             />
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10" />
+            <div className="absolute inset-0 bg-black/60 sm:bg-gradient-to-r sm:from-black/80 sm:via-black/50 sm:to-black/10" />
 
             {/* CONTENT */}
-            <div className="relative z-10 h-full flex items-center">
+            <div className="relative z-10 h-full flex items-center justify-center sm:justify-start">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
-                <div className="max-w-2xl text-white">
-
-                  <span className="inline-block bg-[#631529] px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm mb-3 sm:mb-4">
+                <div
+                  className="
+                    max-w-xl text-white
+                    text-center sm:text-left
+                    mx-auto sm:mx-0
+                  "
+                >
+                  {/* TAG */}
+                  <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-3">
                     {slide.tag}
                   </span>
 
-                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl
-                                 font-bold leading-tight mb-3 sm:mb-6">
+                  {/* TITLE */}
+                  <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl
+                                 font-bold leading-snug mb-3">
                     {slide.title}
                   </h1>
 
-                  <p className="text-sm sm:text-lg md:text-xl mb-3 sm:mb-4">
+                  {/* SUBTITLE */}
+                  <p className="text-sm sm:text-lg md:text-xl mb-3">
                     {slide.subtitle}
                   </p>
 
+                  {/* META */}
                   {slide.meta.length > 0 && (
-                    <ul className="text-sm sm:text-lg mb-4 sm:mb-6">
+                    <ul className="text-sm sm:text-lg mb-4">
                       {slide.meta.map((item, idx) => (
                         <li key={idx}>{item}</li>
                       ))}
                     </ul>
                   )}
 
-                  <button
-                    className="group inline-flex items-center gap-3
-                               bg-white text-[#631529]
-                               px-4 sm:px-6 py-2 sm:py-3
-                               rounded-full font-semibold
-                               text-sm sm:text-base
-                               hover:bg-gray-100 transition"
-                  >
-                    Know More
-                    <span className="bg-[#631529] text-white p-2 rounded-full
-                                     group-hover:translate-x-1 transition-transform">
-                      <ChevronRight size={16} />
-                    </span>
-                  </button>
+                  {/* BUTTON */}
+                  <div className="flex justify-center sm:justify-start">
+                    <button
+                      className="
+                        group inline-flex items-center gap-3
+                        bg-white text-[#631529]
+                        px-5 py-2.5
+                        rounded-full font-semibold
+                        text-sm sm:text-base
+                        hover:bg-gray-100 transition
+                      "
+                    >
+                      Know More
+                      <span className="bg-[#631529] text-white p-2 rounded-full
+                                       group-hover:translate-x-1 transition-transform">
+                        <ChevronRight size={16} />
+                      </span>
+                    </button>
+                  </div>
 
                 </div>
               </div>
@@ -118,8 +132,7 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ARROWS */}
-      {/* Mobile: left & right center */}
+      {/* MOBILE ARROWS (center sides) */}
       <button
         onClick={prevSlide}
         className="sm:hidden absolute left-3 top-1/2 -translate-y-1/2
@@ -136,7 +149,7 @@ export default function HeroSlider() {
         <ChevronRight className="text-[#631529]" />
       </button>
 
-      {/* Desktop: bottom-right (unchanged) */}
+      {/* DESKTOP ARROWS (unchanged) */}
       <div className="hidden sm:flex absolute bottom-10 right-10 gap-4 z-20">
         <button
           onClick={prevSlide}
@@ -144,7 +157,6 @@ export default function HeroSlider() {
         >
           <ChevronLeft className="text-[#631529]" />
         </button>
-
         <button
           onClick={nextSlide}
           className="bg-white/90 hover:bg-white p-3 rounded-full transition"
