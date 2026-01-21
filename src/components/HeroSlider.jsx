@@ -62,7 +62,7 @@ export default function HeroSlider() {
               alt={slide.title}
               className="
                 absolute inset-0 w-full h-full object-cover
-                object-[center_20%] sm:object-center
+                object-[center_50%] sm:object-center
                 scale-[1.05] sm:scale-100
               "
             />
