@@ -2,7 +2,7 @@ import centerImg from "../assets/center.jpg";
 
 export default function FindCenter() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-[#FFEFF4]">
       <div
         className="
           max-w-7xl mx-auto
