@@ -12,6 +12,7 @@ const slides = [
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
     meta: ["Course Fee: ₹50,000 Only"],
+    button: "Know More",
   },
   {
     image: bridal2,
@@ -20,6 +21,7 @@ const slides = [
     title: "Advanced Makeup Artist Program",
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
     meta: ["Duration 93 Hours"],
+    button: "Enroll Now",
   },
   {
     image: bridal3,
@@ -29,6 +31,7 @@ const slides = [
     subtitle:
       "Explore a World of Learning with Our Online Courses Hub. Find Your Next Learning Adventure Today.",
     meta: [],
+    button: "Explore Courses",
   },
 ];
 
@@ -142,7 +145,7 @@ export default function HeroSlider() {
 
                   <div className="flex justify-center sm:justify-start">
                     <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-6 py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition">
-                      Know More
+                      {slide.button}
                       <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition">
                         <ChevronRight size={16} />
                       </span>
