@@ -7,7 +7,7 @@ import bridal3 from "../assets/bridal3.jpg";
 const slides = [
   {
     image: bridal1,
-    position: "50% 25%", // face near top-center
+    position: "50% 25%",
     tag: "Orane Goes Online!",
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
@@ -15,7 +15,7 @@ const slides = [
   },
   {
     image: bridal2,
-    position: "50% 25%", // face slightly lower
+    position: "50% 25%",
     tag: "Professional Courses",
     title: "Advanced Makeup Artist Program",
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
@@ -23,7 +23,7 @@ const slides = [
   },
   {
     image: bridal3,
-    position: "50% 50%", // center
+    position: "50% 50%",
     tag: "Engage, Learn & Grow",
     title: "Learn From Anywhere & Anytime",
     subtitle:
@@ -59,8 +59,8 @@ export default function HeroSlider() {
             key={i}
             className="
               min-w-full relative
-              h-[42vh]
-              sm:h-[60vh]
+              h-[45vh]
+              sm:h-[65vh]
               lg:h-[85vh]
             "
           >
@@ -76,10 +76,14 @@ export default function HeroSlider() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
 
             {/* CONTENT */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="max-w-7xl mx-auto px-5 sm:px-6 w-full">
-                <div className="max-w-xl text-white">
-
+            <div className="absolute inset-0 flex items-center justify-center sm:justify-start">
+              <div className="max-w-7xl mx-auto w-full px-4 sm:px-8">
+                <div
+                  className="
+                    max-w-xl text-white
+                    text-center sm:text-left
+                  "
+                >
                   {/* TAG */}
                   <span className="inline-block bg-[#631529] px-3 py-1 rounded-full text-xs sm:text-sm mb-3">
                     {slide.tag}
@@ -104,34 +108,35 @@ export default function HeroSlider() {
                     </ul>
                   )}
 
-                  {/* BUTTON (MEDIUM ON MOBILE) */}
-                  <button
-                    className="
-                      group inline-flex items-center gap-3
-                      bg-white text-[#631529]
-                      px-5 py-2.5
-                      sm:px-6 sm:py-3
-                      rounded-full
-                      text-sm sm:text-base font-semibold
-                      hover:bg-gray-100
-                      transition
-                    "
-                  >
-                    Know More
-                    <span
+                  {/* BUTTON */}
+                  <div className="flex justify-center sm:justify-start">
+                    <button
                       className="
-                        bg-[#631529] text-white
-                        w-8 h-8 sm:w-9 sm:h-9
-                        flex items-center justify-center
+                        group inline-flex items-center gap-3
+                        bg-white text-[#631529]
+                        px-5 py-2.5
+                        sm:px-6 sm:py-3
                         rounded-full
-                        group-hover:translate-x-1
+                        text-sm sm:text-base font-semibold
+                        hover:bg-gray-100
                         transition
                       "
                     >
-                      <ChevronRight size={16} />
-                    </span>
-                  </button>
-
+                      Know More
+                      <span
+                        className="
+                          bg-[#631529] text-white
+                          w-8 h-8 sm:w-9 sm:h-9
+                          flex items-center justify-center
+                          rounded-full
+                          group-hover:translate-x-1
+                          transition
+                        "
+                      >
+                        <ChevronRight size={16} />
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,21 +144,35 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* CONTROLS */}
-      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 flex gap-3 z-20">
-        <button
-          onClick={prev}
-          className="bg-white/90 p-2 rounded-full"
-        >
-          <ChevronLeft className="text-[#631529]" />
-        </button>
-        <button
-          onClick={next}
-          className="bg-white/90 p-2 rounded-full"
-        >
-          <ChevronRight className="text-[#631529]" />
-        </button>
-      </div>
+      {/* LEFT CONTROL */}
+      <button
+        onClick={prev}
+        className="
+          absolute left-3 sm:left-6
+          top-1/2 -translate-y-1/2
+          bg-white/90 hover:bg-white
+          p-2 sm:p-3
+          rounded-full
+          z-20
+        "
+      >
+        <ChevronLeft className="text-[#631529]" />
+      </button>
+
+      {/* RIGHT CONTROL */}
+      <button
+        onClick={next}
+        className="
+          absolute right-3 sm:right-6
+          top-1/2 -translate-y-1/2
+          bg-white/90 hover:bg-white
+          p-2 sm:p-3
+          rounded-full
+          z-20
+        "
+      >
+        <ChevronRight className="text-[#631529]" />
+      </button>
     </section>
   );
 }
