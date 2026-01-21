@@ -116,8 +116,8 @@ export default function HeroSlider() {
   className="
     inline-block px-4 py-1 rounded-full mb-3
     text-xs sm:text-sm
-    bg-[#631529] text-white
-    sm:bg-[#f2f2f2] sm:text-[#631529]
+    bg-[#f2f2f2] text-[#631529]
+    sm:bg-[#631529] sm:text-[#f2f2f2]
   "
 >
   {slide.tag}
