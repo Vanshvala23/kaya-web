@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Megaphone } from "lucide-react";
 
 const newsItems = [
   "Admissions Open for Bridal Makeup Course – Apply Now",
@@ -13,11 +14,13 @@ export default function NewsTicker() {
 
   useEffect(() => {
     const ticker = tickerRef.current;
+    if (!ticker) return;
+
     let animationId;
     let position = 0;
 
     const animate = () => {
-      position -= 0.5;
+      position -= 0.5; // adjust speed
       if (Math.abs(position) >= ticker.scrollWidth / 2) {
         position = 0;
       }
@@ -31,18 +34,21 @@ export default function NewsTicker() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden bg-[#631529] text-white py-9">
+    <div className="relative overflow-hidden bg-[#631529] text-white py-4 sm:py-6 md:py-9">
       <div
         ref={tickerRef}
-        className="flex whitespace-nowrap gap-12 px-12"
+        className="flex whitespace-nowrap gap-6 sm:gap-8 md:gap-12 px-6 sm:px-12"
       >
         {[...newsItems, ...newsItems].map((item, index) => (
-          <span
+          <div
             key={index}
-            className="text-sm md:text-base font-medium hover:underline cursor-pointer"
+            className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0 cursor-pointer hover:underline"
           >
-            {item}
-          </span>
+            <Megaphone size={16} className="sm:hidden md:inline-block text-yellow-300" />
+            <span className="text-xs sm:text-sm md:text-base font-medium">
+              {item}
+            </span>
+          </div>
         ))}
       </div>
     </div>

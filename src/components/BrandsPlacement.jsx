@@ -13,47 +13,58 @@ const brands = [
 
 export default function BrandsPlacement() {
   const sliderRef = useRef(null);
+  const scrollRef = useRef(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const slider = sliderRef.current;
-    let scrollAmount = 0;
+    if (!slider) return;
 
     const scroll = () => {
-      if (!slider) return;
+      scrollRef.current += 0.6; // adjust speed
+      slider.scrollLeft = scrollRef.current;
 
-      scrollAmount += 0.6;
-      slider.scrollLeft = scrollAmount;
-
-      if (scrollAmount >= slider.scrollWidth / 2) {
-        scrollAmount = 0;
+      if (scrollRef.current >= slider.scrollWidth / 2) {
+        scrollRef.current = 0;
       }
     };
 
-    const interval = setInterval(scroll, 20);
-    return () => clearInterval(interval);
+    intervalRef.current = setInterval(scroll, 20);
+
+    // Pause on hover
+    const handleMouseEnter = () => clearInterval(intervalRef.current);
+    const handleMouseLeave = () =>
+      (intervalRef.current = setInterval(scroll, 20));
+
+    slider.addEventListener("mouseenter", handleMouseEnter);
+    slider.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      slider.removeEventListener("mouseenter", handleMouseEnter);
+      slider.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#fdecee] via-[#f9edf3] to-[#f7eef4]">
-      
+    <section className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-br from-[#fdecee] via-[#f9edf3] to-[#f7eef4]">
       {/* soft background glow */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#7b1020]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#7b1020]/10 rounded-full blur-3xl" />
+      <div className="absolute -top-32 -left-32 w-72 md:w-96 h-72 md:h-96 bg-[#7b1020]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-64 md:w-80 h-64 md:h-80 bg-[#7b1020]/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-
         {/* Header */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-14">
-          <div className="max-w-xl">
-            <span className="inline-block bg-[#7b1020] text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 tracking-wide">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-12 md:mb-16">
+          <div className="max-w-xl text-center lg:text-left">
+            <span className="inline-block bg-[#7b1020] text-white text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-5 tracking-wide">
               PLACEMENTS
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-serif leading-tight text-[#1a1a1a] mb-5">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif leading-tight text-[#1a1a1a] mb-4 sm:mb-5">
               Brands Our Students <br /> Working With
             </h2>
 
-            <p className="text-gray-700 text-lg leading-relaxed">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               100% Job assistance with unlimited{" "}
               <span className="text-[#7b1020] font-medium underline underline-offset-4">
                 placement
@@ -66,33 +77,21 @@ export default function BrandsPlacement() {
         {/* Auto Scroll */}
         <div
           ref={sliderRef}
-          className="flex gap-10 overflow-x-hidden whitespace-nowrap group"
+          className="flex gap-6 md:gap-10 overflow-x-hidden whitespace-nowrap"
         >
           {brands.map((logo, index) => (
             <div
               key={index}
-              className="
-                min-w-[280px] h-[150px]
-                bg-white/80 backdrop-blur
-                rounded-[48px]
-                flex items-center justify-center
-                shadow-[0_20px_40px_rgba(0,0,0,0.08)]
-                border border-white
-                transition-all duration-500
-                group-hover:pause
-                hover:-translate-y-2
-                hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]
-              "
+              className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] h-[120px] sm:h-[140px] md:h-[150px] bg-white/80 backdrop-blur rounded-[32px] md:rounded-[48px] flex items-center justify-center shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-white"
             >
               <img
                 src={logo}
                 alt="Brand"
-                className="max-h-16 object-contain grayscale hover:grayscale-0 transition duration-500"
+                className="max-h-12 sm:max-h-16 md:max-h-16 object-contain grayscale hover:grayscale-0 transition duration-500"
               />
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

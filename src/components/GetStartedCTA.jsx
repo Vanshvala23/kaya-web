@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function GetStartedCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#6f1430] py-24 rounded-[32px] mx-4 md:mx-8 lg:mx-16">
+    <section className="relative overflow-hidden bg-[#6f1430] py-16 md:py-24 rounded-[32px] mx-4 md:mx-8 lg:mx-16">
 
       {/* Decorative curved lines */}
       <svg
@@ -22,12 +22,12 @@ export default function GetStartedCTA() {
       </svg>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-6 text-white">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold mb-6">
+      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 text-white">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-semibold mb-4 sm:mb-6">
           Get Started with Our Program
         </h2>
 
-        <p className="text-white/90 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-10">
+        <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-10">
           Take the first step towards a beautiful future with Orane! Contact
           Orane for quality education and support to launch your beauty career
           confidently today!
@@ -38,8 +38,10 @@ export default function GetStartedCTA() {
           className="
             group inline-flex items-center gap-4
             bg-white text-[#6f1430]
-            px-8 py-4 rounded-full
-            text-lg font-medium
+            px-6 sm:px-8 py-3 sm:py-4
+            rounded-full
+            text-base sm:text-lg
+            font-medium
             shadow-lg
             hover:shadow-xl
             transition-all duration-300
@@ -50,13 +52,14 @@ export default function GetStartedCTA() {
           <span
             className="
               flex items-center justify-center
-              w-10 h-10 rounded-full
+              w-9 h-9 sm:w-10 sm:h-10
+              rounded-full
               bg-[#6f1430] text-white
               group-hover:translate-x-1
-              transition
+              transition-transform
             "
           >
-            <ArrowUpRight size={20} />
+            <ArrowUpRight size={18} className="sm:text-[20px]" />
           </span>
         </button>
       </div>

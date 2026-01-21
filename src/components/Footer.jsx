@@ -1,32 +1,48 @@
-import {
-  MapPin,
-  Phone,
-  Mail,
-  ArrowUp,
-} from "lucide-react";
-
-// import appStore from "../assets/appstore.png";
-// import playStore from "../assets/playstore.png";
-// import qr from "../assets/qr.png";
+import { useEffect, useState } from "react";
+import { MapPin, Phone, Mail, ArrowUp } from "lucide-react";
 
 export default function Footer() {
+  const [showArrow, setShowArrow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show arrow after scrolling past 300px (adjust as needed)
+      setShowArrow(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const quickLinks = [
+    "Home",
+    "Blog",
+    "About Us",
+    "Contact Us",
+    "Certificate Tracking",
+  ];
+
+  const courses = [
+    "Aesthetic",
+    "Beauty",
+    "Combo Cosmetology",
+    "Spa",
+    "Courses-on-EMI",
+    "View More",
+  ];
+
+  const socialIcons = ["facebook", "x", "instagram", "youtube", "linkedin", "pinterest"];
+
   return (
-    <footer className="bg-white text-gray-800 border-t">
+    <footer className="bg-white text-gray-800 border-t relative">
 
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
 
         {/* Quick Links */}
         <div>
           <h4 className="font-semibold text-lg mb-6">Quick Links</h4>
           <ul className="space-y-3 text-sm">
-            {[
-              "Home",
-              "Blog",
-              "About Us",
-              "Contact Us",
-              "Certificate Tracking",
-            ].map((item) => (
+            {quickLinks.map((item) => (
               <li
                 key={item}
                 className="hover:text-[#631529] transition cursor-pointer"
@@ -35,25 +51,13 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-
-          <div className="flex gap-3 mt-6">
-            {/* <img src={appStore} alt="App Store" className="h-10" />
-            <img src={playStore} alt="Play Store" className="h-10" /> */}
-          </div>
         </div>
 
         {/* Courses */}
         <div>
           <h4 className="font-semibold text-lg mb-6">Courses</h4>
           <ul className="space-y-3 text-sm">
-            {[
-              "Aesthetic",
-              "Beauty",
-              "Combo Cosmetology",
-              "Spa",
-              "Courses-on-EMI",
-              "View More",
-            ].map((item) => (
+            {courses.map((item) => (
               <li
                 key={item}
                 className="hover:text-[#631529] transition cursor-pointer"
@@ -76,9 +80,7 @@ export default function Footer() {
               <span>
                 312-17750, 65A Ave, Surrey, BC, V3S 5N4, Canada
                 <br />
-                <span className="text-xs text-gray-500">
-                  (PTIRU Approved)
-                </span>
+                <span className="text-xs text-gray-500">(PTIRU Approved)</span>
               </span>
             </li>
 
@@ -106,9 +108,7 @@ export default function Footer() {
             <li className="flex gap-3">
               <MapPin size={18} />
               <span>
-                SCO 88–92 Sector 82, JLPL Industrial Area,
-                Airport Road, Sahibzada Ajit Singh Nagar,
-                Punjab 140308
+                SCO 88–92 Sector 82, JLPL Industrial Area, Airport Road, Sahibzada Ajit Singh Nagar, Punjab 140308
               </span>
             </li>
 
@@ -120,10 +120,6 @@ export default function Footer() {
               <Phone size={18} /> +91 8872 500 500
             </li>
           </ul>
-
-          <div className="mt-6">
-            {/* <img src={qr} alt="QR Code" className="h-24" /> */}
-          </div>
         </div>
       </div>
 
@@ -131,38 +127,28 @@ export default function Footer() {
       <div className="border-t py-6 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
 
-          <p>
+          <p className="text-center md:text-left">
             © 2026 Orane International Private Limited. All Rights Reserved.
             <br />
             Website designed by{" "}
-            <span className="text-[#631529] font-medium">
-              Steline Infotech
-            </span>
+            <span className="text-[#631529] font-medium">Steline Infotech</span>
           </p>
 
           {/* Social Icons */}
-          <div className="flex gap-4 text-gray-500">
-            {["facebook", "x", "instagram", "youtube", "linkedin", "pinterest"].map(
-              (icon) => (
-                <div
-                  key={icon}
-                  className="w-9 h-9 rounded-full bg-gray-100
-                  flex items-center justify-center
-                  hover:bg-[#631529] hover:text-white transition cursor-pointer"
-                >
-                  {icon[0].toUpperCase()}
-                </div>
-              )
-            )}
+          <div className="flex gap-3 md:gap-4">
+            {socialIcons.map((icon) => (
+              <div
+                key={icon}
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#631529] hover:text-white transition cursor-pointer text-sm font-bold"
+              >
+                {icon[0].toUpperCase()}
+              </div>
+            ))}
           </div>
 
-          <div className="flex gap-6">
-            <span className="cursor-pointer hover:text-[#631529]">
-              Disclaimer
-            </span>
-            <span className="cursor-pointer hover:text-[#631529]">
-              Privacy Policy
-            </span>
+          <div className="flex gap-6 flex-wrap justify-center md:justify-end">
+            <span className="cursor-pointer hover:text-[#631529]">Disclaimer</span>
+            <span className="cursor-pointer hover:text-[#631529]">Privacy Policy</span>
           </div>
         </div>
       </div>
@@ -170,13 +156,15 @@ export default function Footer() {
       {/* Back to top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="
-          fixed bottom-6 right-6
+        className={`
+          fixed bottom-6 left-6
           w-12 h-12 rounded-full
           bg-[#631529] text-white
           flex items-center justify-center
           shadow-lg hover:scale-110 transition
-        "
+          ${showArrow ? "opacity-100" : "opacity-0 pointer-events-none"}
+        `}
+        style={{ transition: "opacity 0.5s" }}
       >
         <ArrowUp />
       </button>

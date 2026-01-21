@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import p1 from "../assets/p1.jpg";
 import p2 from "../assets/p2.jpg";
@@ -43,14 +43,40 @@ const data = [
 
 export default function Placements() {
   const [index, setIndex] = useState(0);
-  const visible = 3;
+  const containerRef = useRef(null);
+  const [visible, setVisible] = useState(3);
+  const [cardWidth, setCardWidth] = useState(320);
+
+  // Update visible cards & card width on resize
+  useEffect(() => {
+    const handleResize = () => {
+      const width = containerRef.current?.offsetWidth || 0;
+      if (width < 640) {
+        setVisible(1);
+        setCardWidth(width - 32); // full width with margin
+      } else if (width < 1024) {
+        setVisible(2);
+        setCardWidth((width - 24) / 2); // gap = 24px
+      } else {
+        setVisible(3);
+        setCardWidth(320);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const prev = () => setIndex(Math.max(index - 1, 0));
+  const next = () => setIndex(Math.min(index + 1, data.length - visible));
 
   return (
     <section className="py-24 bg-[#631529]">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}
-        <div className="flex justify-between items-start mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
           <div>
             <span className="inline-block bg-white text-[#631529] text-xs px-4 py-1 rounded-full mb-3">
               OUR PLACEMENTS
@@ -66,9 +92,9 @@ export default function Placements() {
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 mt-4 sm:mt-0">
             <button
-              onClick={() => setIndex(Math.max(index - 1, 0))}
+              onClick={prev}
               className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
             >
               <ChevronLeft size={18} />
@@ -77,9 +103,7 @@ export default function Placements() {
             <div className="w-8 h-1 bg-white/40 rounded-full" />
 
             <button
-              onClick={() =>
-                setIndex(Math.min(index + 1, data.length - visible))
-              }
+              onClick={next}
               className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
             >
               <ChevronRight size={18} />
@@ -88,23 +112,22 @@ export default function Placements() {
         </div>
 
         {/* SLIDER */}
-        <div className="overflow-hidden">
+        <div className="overflow-hidden" ref={containerRef}>
           <div
-            className="flex gap-8 transition-transform duration-700"
-            style={{ transform: `translateX(-${index * 340}px)` }}
+            className="flex gap-6 transition-transform duration-700"
+            style={{ transform: `translateX(-${index * (cardWidth + 24)}px)` }}
           >
             {data.map((item, i) => (
               <div
                 key={i}
-                className="min-w-[320px] bg-[#f7f1f5] rounded-[28px] p-6 relative"
+                className="flex-shrink-0 rounded-[28px] p-6 bg-[#f7f1f5] relative"
+                style={{ width: `${cardWidth}px` }}
               >
                 {/* SPOT LIGHT */}
-                <div className="absolute left-4 top-16">
-                  <div className="rotate-[-90deg]">
-                    <span className="bg-[#631529] text-white text-xs px-3 py-1 rounded-full tracking-wide">
-                      SPOT LIGHT
-                    </span>
-                  </div>
+                <div className="absolute left-4 top-16 rotate-[-90deg]">
+                  <span className="bg-[#631529] text-white text-xs px-3 py-1 rounded-full tracking-wide">
+                    SPOT LIGHT
+                  </span>
                 </div>
 
                 {/* IMAGE */}

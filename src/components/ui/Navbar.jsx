@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,17 @@ export default function Navbar() {
 
   const linkBase =
     "relative group flex items-center gap-1 transition-colors duration-300";
+
+  const navItems = [
+    { name: "About Us", path: "/about", dropdown: true },
+    { name: "Courses", path: "/courses", dropdown: true },
+    { name: "Franchise", path: "/franchise" },
+    { name: "Location", path: "/location", dropdown: true },
+    { name: "Career", path: "/career", dropdown: true },
+    { name: "Blog", path: "/blog", dropdown: true },
+    { name: "Contact Us", path: "/contact" },
+    { name: "Testimonials", path: "/testimonials" },
+  ];
 
   return (
     <header
@@ -32,34 +44,20 @@ export default function Navbar() {
           OraneStyle
         </NavLink>
 
-        {/* Links */}
+        {/* Desktop Links */}
         <ul className="hidden md:flex space-x-8 text-white font-medium">
-          
-          {[
-            { name: "About Us", path: "/about", dropdown: true },
-            { name: "Courses", path: "/courses", dropdown: true },
-            { name: "Franchise", path: "/franchise" },
-            { name: "Location", path: "/location", dropdown: true },
-            { name: "Career", path: "/career", dropdown: true },
-            { name: "Blog", path: "/blog", dropdown: true },
-            { name: "Contact Us", path: "/contact" },
-            { name: "Testimonials", path: "/testimonials" },
-          ].map((item, index) => (
-            <li key={index}>
+          {navItems.map((item, index) => (
+            <li key={index} className="relative">
               <NavLink
                 to={item.path}
                 className={({ isActive }) =>
-                  `${linkBase} ${
-                    isActive ? "text-[#d4af37]" : "text-white"
-                  }`
+                  `${linkBase} ${isActive ? "text-[#d4af37]" : "text-white"}`
                 }
               >
                 {item.name}
                 {item.dropdown && (
                   <ChevronDown size={16} className="mt-[2px]" />
                 )}
-
-                {/* Gold underline */}
                 <span
                   className="
                     absolute left-0 -bottom-1
@@ -73,7 +71,33 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-white p-2 rounded-lg hover:bg-white/20 transition"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-[#631529] text-white px-6 py-4 space-y-4">
+          {navItems.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              <NavLink
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-between py-2 text-white font-medium hover:text-[#d4af37] transition"
+              >
+                {item.name}
+                {item.dropdown && <ChevronDown size={16} />}
+              </NavLink>
+            </div>
+          ))}
+        </div>
+      )}
     </header>
   );
 }
