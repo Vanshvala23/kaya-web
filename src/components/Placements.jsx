@@ -1,0 +1,146 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+
+import p1 from "../assets/p1.jpg";
+import p2 from "../assets/p2.jpg";
+import p3 from "../assets/p3.jpg";
+import p4 from "../assets/p4.jpg";
+
+const data = [
+  {
+    name: "Manvi",
+    image: p1,
+    course: "Clinical Dermatech",
+    salary: "2,34,000 per Annum",
+    location: "Noida",
+    designation: "Skin Therapist",
+  },
+  {
+    name: "Saurprit",
+    image: p2,
+    course: "Enrich",
+    salary: "2,94,000 per Annum",
+    location: "Malad",
+    designation: "Beauty Therapist",
+  },
+  {
+    name: "Ojussi",
+    image: p3,
+    course: "Algherm",
+    salary: "2,40,000 per Annum",
+    location: "Noida",
+    designation: "Sales",
+  },
+  {
+    name: "Anshu Garg",
+    image: p4,
+    course: "Makeup",
+    salary: "3,40,000 per Annum",
+    location: "Preet Vihar",
+    designation: "Skin Therapist",
+  },
+];
+
+export default function Placements() {
+  const [index, setIndex] = useState(0);
+  const visible = 3;
+
+  return (
+    <section className="py-24 bg-[#631529]">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* HEADER */}
+        <div className="flex justify-between items-start mb-12">
+          <div>
+            <span className="inline-block bg-white text-[#631529] text-xs px-4 py-1 rounded-full mb-3">
+              OUR PLACEMENTS
+            </span>
+
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
+              Success Snapshots
+            </h2>
+
+            <p className="text-white/70 text-sm">
+              We can boast of numerous accolades earned over the years.
+            </p>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIndex(Math.max(index - 1, 0))}
+              className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="w-8 h-1 bg-white/40 rounded-full" />
+
+            <button
+              onClick={() =>
+                setIndex(Math.min(index + 1, data.length - visible))
+              }
+              className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* SLIDER */}
+        <div className="overflow-hidden">
+          <div
+            className="flex gap-8 transition-transform duration-700"
+            style={{ transform: `translateX(-${index * 340}px)` }}
+          >
+            {data.map((item, i) => (
+              <div
+                key={i}
+                className="min-w-[320px] bg-[#f7f1f5] rounded-[28px] p-6 relative"
+              >
+                {/* SPOT LIGHT */}
+                <div className="absolute left-4 top-16">
+                  <div className="rotate-[-90deg]">
+                    <span className="bg-[#631529] text-white text-xs px-3 py-1 rounded-full tracking-wide">
+                      SPOT LIGHT
+                    </span>
+                  </div>
+                </div>
+
+                {/* IMAGE */}
+                <div className="rounded-2xl overflow-hidden mb-4">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-56 object-cover"
+                  />
+                </div>
+
+                {/* CONTENT */}
+                <p className="text-center font-serif text-[#631529] text-lg mb-1">
+                  ✨ Congratulations ✨
+                </p>
+
+                <h3 className="text-center font-semibold text-[#631529] mb-2">
+                  {item.name}
+                </h3>
+
+                <p className="text-center text-xs text-gray-600 leading-relaxed">
+                  Student of Orane International, for getting placed in{" "}
+                  <strong>{item.course}</strong>
+                </p>
+
+                <div className="mt-4 text-center text-xs text-gray-500 space-y-1">
+                  <p>Salary: {item.salary}</p>
+                  <p>Location: {item.location}</p>
+                  <p>Designation: {item.designation}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
