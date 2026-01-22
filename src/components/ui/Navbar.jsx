@@ -5,7 +5,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [mobileDropdowns, setMobileDropdowns] = useState({});
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
@@ -69,6 +69,13 @@ export default function Navbar() {
       ],
     },
   ];
+
+  const toggleMobileDropdown = (name) => {
+    setMobileDropdowns((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
+  };
 
   return (
     <header
@@ -168,7 +175,7 @@ export default function Navbar() {
             <div key={index}>
               <button
                 onClick={() =>
-                  item.dropdown && setMobileDropdownOpen(!mobileDropdownOpen)
+                  item.dropdown && toggleMobileDropdown(item.name)
                 }
                 className={`w-full text-left px-4 py-2 rounded-lg flex items-center justify-between transition-all duration-300 ${
                   location.pathname === item.path
@@ -181,14 +188,14 @@ export default function Navbar() {
                   <ChevronDown
                     size={16}
                     className={`transition-transform duration-300 ${
-                      mobileDropdownOpen ? "rotate-180 text-[#631529]" : ""
+                      mobileDropdowns[item.name] ? "rotate-180 text-[#631529]" : ""
                     }`}
                   />
                 )}
               </button>
 
               {/* MOBILE DROPDOWN */}
-              {item.dropdown && item.name === "Courses" && mobileDropdownOpen && (
+              {item.dropdown && item.name === "Courses" && mobileDropdowns[item.name] && (
                 <div className="pl-4 mt-1 space-y-1 border-l border-white/20">
                   {coursesMenu.map((category, idx) => (
                     <div key={idx} className="mb-2">
