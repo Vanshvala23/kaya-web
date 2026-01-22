@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import bridal1 from "../assets/bridal1.jpg";
 import bridal2 from "../assets/bridal2.jpg";
 import bridal3 from "../assets/bridal3.jpg";
@@ -13,6 +15,7 @@ const slides = [
     subtitle: "Get Certified in 45 Days",
     meta: ["Course Fee: ₹50,000 Only"],
     button: "Know More",
+    link: "/courses/bridal-makeup",
   },
   {
     image: bridal2,
@@ -22,6 +25,7 @@ const slides = [
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
     meta: ["Duration 93 Hours"],
     button: "Enroll Now",
+    link: "/courses/makeup-artist",
   },
   {
     image: bridal3,
@@ -32,6 +36,7 @@ const slides = [
       "Explore a World of Learning with Our Online Courses Hub. Find Your Next Learning Adventure Today.",
     meta: [],
     button: "Explore Courses",
+    link: "/courses",
   },
 ];
 
@@ -39,6 +44,7 @@ export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(
@@ -54,7 +60,6 @@ export default function HeroSlider() {
   const nextSlide = () =>
     setCurrent((p) => (p + 1) % slides.length);
 
-  /* ---------- SWIPE SUPPORT ---------- */
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -65,16 +70,12 @@ export default function HeroSlider() {
 
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
-
     const distance = touchStartX.current - touchEndX.current;
-
     if (distance > 50) nextSlide();
     if (distance < -50) prevSlide();
-
     touchStartX.current = null;
     touchEndX.current = null;
   };
-  /* ---------------------------------- */
 
   return (
     <section
@@ -83,7 +84,6 @@ export default function HeroSlider() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* SLIDER */}
       <div
         className="flex transition-transform duration-700 ease-in-out
                    h-[70vh] sm:h-[80vh] lg:h-screen"
@@ -91,41 +91,21 @@ export default function HeroSlider() {
       >
         {slides.map((slide, i) => (
           <div key={i} className="min-w-full relative h-full">
-            {/* IMAGE (BRIGHTER) */}
             <img
               src={slide.image}
               alt={slide.title}
               style={{ objectPosition: slide.position }}
-              className="
-                absolute inset-0 w-full h-full object-cover
-                filter brightness-125 contrast-105
-              "
+              className="absolute inset-0 w-full h-full object-cover brightness-125 contrast-105"
             />
 
-            {/* OVERLAY */}
             <div className="absolute inset-0 bg-black/50 sm:bg-gradient-to-r sm:from-black/70 sm:via-black/40 sm:to-black/10" />
 
-            {/* CONTENT */}
-            <div
-              className="
-                relative z-10 h-full flex
-                items-end pb-10
-                sm:items-center sm:pb-0 sm:justify-start
-              "
-            >
+            <div className="relative z-10 h-full flex items-end pb-10 sm:items-center sm:pb-0">
               <div className="max-w-7xl mx-auto w-full px-4 sm:px-6">
                 <div className="max-w-xl mx-auto sm:mx-0 text-white text-center sm:text-left">
-                  <span
-  className="
-    inline-block px-6 py-1 rounded-full mb-3
-    text-xs sm:text-sm
-    bg-[#f2f2f2] text-[#631529]
-    sm:bg-[#631529] sm:text-[#f2f2f2] 
-  "
->
-  {slide.tag}
-</span>
-
+                  <span className="inline-block px-6 py-1 rounded-full mb-3 text-xs sm:text-sm bg-[#f2f2f2] text-[#631529] sm:bg-[#631529] sm:text-[#f2f2f2]">
+                    {slide.tag}
+                  </span>
 
                   <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
                     {slide.title}
@@ -144,9 +124,23 @@ export default function HeroSlider() {
                   )}
 
                   <div className="flex justify-center sm:justify-start">
-                    <button className="group inline-flex items-center gap-3 bg-white text-[#631529] px-6 py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition">
+                    <button
+                      onClick={() => navigate(slide.link)}
+                      className="group inline-flex items-center gap-3
+                        bg-white text-[#631529]
+                        px-6 py-3 rounded-full font-semibold
+                        transition-all duration-300
+                        hover:bg-[#631529] hover:text-white
+                        hover:scale-105
+                        hover:shadow-[0_0_25px_rgba(99,21,41,0.7)]"
+                    >
                       {slide.button}
-                      <span className="bg-[#631529] text-white p-2 rounded-full group-hover:translate-x-1 transition">
+                      <span
+                        className="bg-[#631529] text-white p-2 rounded-full
+                          transition-all duration-300
+                          group-hover:bg-white group-hover:text-[#631529]
+                          group-hover:translate-x-1"
+                      >
                         <ChevronRight size={16} />
                       </span>
                     </button>
@@ -161,24 +155,46 @@ export default function HeroSlider() {
       {/* MOBILE ARROWS */}
       <button
         onClick={prevSlide}
-        className="sm:hidden absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full z-20"
+        className="sm:hidden absolute left-3 top-1/2 -translate-y-1/2
+          bg-white/90 p-2 rounded-full z-20
+          transition-all duration-300
+          hover:bg-[#631529] hover:scale-110
+          hover:shadow-[0_0_20px_rgba(99,21,41,0.8)]"
       >
-        <ChevronLeft className="text-[#631529]" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="sm:hidden absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full z-20"
-      >
-        <ChevronRight className="text-[#631529]" />
+        <ChevronLeft className="text-[#631529] hover:text-white" />
       </button>
 
-      {/* DESKTOP ARROWS */}
+      <button
+        onClick={nextSlide}
+        className="sm:hidden absolute right-3 top-1/2 -translate-y-1/2
+          bg-white/90 p-2 rounded-full z-20
+          transition-all duration-300
+          hover:bg-[#631529] hover:scale-110
+          hover:shadow-[0_0_20px_rgba(99,21,41,0.8)]"
+      >
+        <ChevronRight className="text-[#631529] hover:text-white" />
+      </button>
+
+      {/* DESKTOP ARROWS — POSITION UNCHANGED */}
       <div className="hidden sm:flex absolute bottom-10 right-10 gap-4 z-20">
-        <button onClick={prevSlide} className="bg-white/90 p-3 rounded-full">
-          <ChevronLeft className="text-[#631529]" />
+        <button
+          onClick={prevSlide}
+          className="bg-white/90 p-3 rounded-full
+            transition-all duration-300
+            hover:bg-[#631529] hover:scale-110
+            hover:shadow-[0_0_20px_rgba(99,21,41,0.8)]"
+        >
+          <ChevronLeft className="text-[#631529] hover:text-white" />
         </button>
-        <button onClick={nextSlide} className="bg-white/90 p-3 rounded-full">
-          <ChevronRight className="text-[#631529]" />
+
+        <button
+          onClick={nextSlide}
+          className="bg-white/90 p-3 rounded-full
+            transition-all duration-300
+            hover:bg-[#631529] hover:scale-110
+            hover:shadow-[0_0_20px_rgba(99,21,41,0.8)]"
+        >
+          <ChevronRight className="text-[#631529] hover:text-white" />
         </button>
       </div>
     </section>
