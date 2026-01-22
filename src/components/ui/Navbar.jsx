@@ -7,7 +7,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  const isAboutPage = location.pathname === "/about-us";
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,19 +17,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* NAVBAR BACKGROUND */
+  /* ================= NAVBAR STYLES ================= */
+
   const navbarBg = scrolled
     ? "bg-[#631529] shadow-lg"
-    : isAboutPage
-    ? "bg-white shadow"
-    : "bg-transparent";
+    : isHomePage
+    ? "bg-transparent"
+    : "bg-white shadow";
 
-  /* TEXT COLOR */
   const textColor = scrolled
     ? "text-white"
-    : isAboutPage
-    ? "text-[#631529]"
-    : "text-white";
+    : isHomePage
+    ? "text-white"
+    : "text-[#631529]";
 
   const navItems = [
     { name: "About Us", path: "/about-us", dropdown: true },
@@ -47,7 +47,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
+
         {/* LOGO */}
         <NavLink
           to="/"
