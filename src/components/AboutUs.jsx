@@ -8,9 +8,9 @@ export default function AboutUs() {
   }, []);
 
   return (
-    <section className="relative bg-[#fde7e3] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative">
-        
+    <section className="relative bg-[#fde7e3] overflow-hidden pt-24 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
         {/* LEFT CONTENT */}
         <div className="relative z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-[#631529] leading-snug sm:leading-tight md:leading-tight">
@@ -19,14 +19,14 @@ export default function AboutUs() {
             Education Since 1999
           </h1>
 
-          <p className="mt-4 sm:mt-6 text-gray-700 leading-relaxed max-w-xl text-sm sm:text-base">
+          <p className="mt-4 sm:mt-6 text-gray-700 leading-relaxed text-sm sm:text-base max-w-xl">
             Skilling is the key to a better India where youth will have a safe and
             better future with better career opportunities. With this thought in
             mind, <span className="text-[#631529] font-medium">Orane International</span> was
             conceptualised in 1999. We offer skill-based courses to empower youth!
           </p>
 
-          <p className="mt-3 sm:mt-4 text-gray-700 leading-relaxed max-w-xl text-sm sm:text-base">
+          <p className="mt-3 sm:mt-4 text-gray-700 leading-relaxed text-sm sm:text-base max-w-xl">
             Since 1999, we’ve empowered more than{" "}
             <span className="text-[#631529] font-semibold">1 Lakh+</span> aspiring
             individuals with exceptional skills. With over{" "}
@@ -45,17 +45,13 @@ export default function AboutUs() {
               {/* Primary Button */}
               <button className="flex items-center gap-2 bg-[#631529] text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium shadow-md hover:bg-white hover:text-[#631529] hover:shadow-xl transition-all duration-300">
                 Get Enrolled
-                <span className="text-lg">
-                    <ArrowUpRight />
-                </span>
+                <ArrowUpRight className="text-lg" />
               </button>
 
               {/* Secondary Button */}
               <button className="flex items-center gap-2 border border-[#631529] text-[#631529] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium bg-[#ffebe7] hover:bg-white hover:text-[#631529] shadow-md hover:shadow-xl transition-all duration-300">
                 Explore Our Courses
-                <span className="text-lg">
-                    <ArrowUpRight />
-                </span>
+                <ArrowUpRight className="text-lg" />
               </button>
             </div>
           </div>
