@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import aboutImage from "../assets/aboutus1.jpg"; // Replace with your image
 import historyImage from "../assets/history.jpg"; // Replace with your history image
-
+import visionImage from "../assets/vision.jpg";
 export default function AboutUs() {
   useEffect(() => {
     document.title = "About Us | Orane";
@@ -110,6 +110,61 @@ export default function AboutUs() {
 
         </div>
       </section>
+        {/* ====== Vision & Mission Section ====== */}
+        {/* ====== Vision & Mission Section ====== */}
+<section className="relative bg-[#631529] py-20 sm:py-28 overflow-hidden">
+  {/* Decorative floral background element */}
+  <div className="absolute bottom-0 right-0 w-48 h-48 opacity-10 pointer-events-none">
+    <svg viewBox="0 0 200 200" className="w-full h-full">
+      <path d="M100 100 Q150 50 180 100 Q150 150 100 100" fill="currentColor" className="text-white" />
+      <path d="M100 100 Q80 30 50 80 Q100 120 100 100" fill="currentColor" className="text-white" />
+      <path d="M100 100 Q20 100 50 150 Q80 120 100 100" fill="currentColor" className="text-white" />
+      <path d="M100 100 Q120 170 170 150 Q130 130 100 100" fill="currentColor" className="text-white" />
+    </svg>
+  </div>
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start gap-12 relative z-10">
+    {/* IMAGE */}
+    <div className="w-full md:w-1/2 h-80 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
+      <img
+        src={visionImage}
+        alt="Vision & Mission"
+        className="w-full h-full object-cover rounded-2xl"
+      />
+    </div>
+
+    {/* TEXT */}
+    <div className="w-full md:w-1/2 text-white flex flex-col justify-center gap-6">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold leading-tight">
+        Vision & <span className="block">Mission</span>
+      </h2>
+
+      {/* Divider line */}
+      <div className="w-16 h-1 bg-white"></div>
+
+      {/* Mission Box */}
+      <div className="space-y-3">
+        <span className="inline-block text-xs font-bold tracking-widest text-white uppercase bg-[#8B2E3E] px-3 py-1.5 rounded">
+          Our Mission
+        </span>
+        <p className="text-sm sm:text-base leading-relaxed text-gray-100">
+          Empowering Aspiring Youth. At Orane International, our mission is clear: We are confident that quality, skill-based learning in the beauty and wellness industry will ignite the future. Whether you dream of becoming a makeup artist, a cosmetologist, or a nutrition expert, we're here to guide you.
+        </p>
+      </div>
+
+      {/* Vision Box */}
+      <div className="space-y-3">
+        <span className="inline-block text-xs font-bold tracking-widest text-white uppercase bg-[#8B2E3E] px-3 py-1.5 rounded">
+          Our Vision
+        </span>
+        <p className="text-sm sm:text-base leading-relaxed text-gray-100">
+          A Global Beacon of Excellence. Our vision is deeply woven into our DNA. We envision Orane as a global beacon of excellence—a place where creativity, innovation, and skill converge. We see a world where our trained students lead the industry, shaping trends.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     </div>
   );

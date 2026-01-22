@@ -159,7 +159,7 @@ export default function Footer() {
         className={`
           fixed bottom-6 left-6
           w-12 h-12 rounded-full
-          bg-[#631529] text-white
+          bg-[#8b2e3e] text-white
           flex items-center justify-center
           shadow-lg hover:scale-110 transition
           ${showArrow ? "opacity-100" : "opacity-0 pointer-events-none"}
