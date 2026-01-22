@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import aboutImage from "../assets/aboutus1.jpg"; // Replace with your image
 import historyImage from "../assets/history.jpg"; // Replace with your history image
 import visionImage from "../assets/vision.jpg";
 export default function AboutUs() {
+  const navigate=useNavigate();
   useEffect(() => {
     document.title = "About Us | Orane";
   }, []);
@@ -53,7 +55,7 @@ export default function AboutUs() {
                 </button>
 
                 {/* Secondary Button */}
-                <button className="flex items-center gap-2 border border-[#631529] text-[#631529] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium bg-[#ffebe7] hover:bg-white hover:text-[#631529] shadow-md hover:shadow-xl transition-all duration-300" onClick={() => window.location.href = "/courses"}>
+                <button className="flex items-center gap-2 border border-[#631529] text-[#631529] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium bg-[#ffebe7] hover:bg-white hover:text-[#631529] shadow-md hover:shadow-xl transition-all duration-300"  onClick={() => navigate('/courses')}>
                   Explore Our Courses
                   <ArrowUpRight className="text-lg" />
                 </button>
