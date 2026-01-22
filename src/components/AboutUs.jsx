@@ -58,7 +58,7 @@ export default function AboutUs() {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative w-full h-64 sm:h-80 md:h-[480px] lg:h-[520px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div className="relative w-full h-64 sm:h-80 md:h-[480px] lg:h-[520px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 hidden md:block">
           <img
             src={aboutImage}
             alt="Beauty Academy"
