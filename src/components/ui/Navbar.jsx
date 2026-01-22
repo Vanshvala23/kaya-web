@@ -5,19 +5,16 @@ import { ChevronDown, Menu, X } from "lucide-react";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  /* ================= NAVBAR STYLES ================= */
 
   const navbarBg = scrolled
     ? "bg-[#631529] shadow-lg"
@@ -31,8 +28,9 @@ export default function Navbar() {
     ? "text-white"
     : "text-[#631529]";
 
+  // Main nav items
   const navItems = [
-    { name: "About Us", path: "/about-us", dropdown: true },
+    { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
     { name: "Franchise", path: "/franchise" },
     { name: "Location", path: "/location", dropdown: true },
@@ -42,51 +40,102 @@ export default function Navbar() {
     { name: "Testimonials", path: "/testimonials" },
   ];
 
+  // Courses dropdown with categories for multi-column
+  const coursesMenu = [
+    {
+      heading: "Advanced Aesthetic Courses",
+      items: [
+        { name: "Aesthetic", path: "/courses/aesthetic" },
+        { name: "Beauty", path: "/courses/beauty" },
+        { name: "Combo Cosmetology", path: "/courses/combo-cosmetology" },
+        { name: "Hair", path: "/courses/hair" },
+        { name: "Korean Makeup", path: "/courses/korean-makeup" },
+        { name: "Master Educator Programme", path: "/courses/master-educator" },
+        { name: "Nail", path: "/courses/nail" },
+        { name: "Salon Management", path: "/courses/salon-management" },
+      ],
+    },
+    {
+      heading: "Certification & Other Courses",
+      items: [
+        { name: "Aesthetic", path: "/courses/aesthetic" },
+        { name: "B.VOC Degree Cosmetology", path: "/courses/bvoc" },
+        { name: "Courses-on-EMI", path: "/courses/courses-on-emi" },
+        { name: "International Certification", path: "/courses/international" },
+        { name: "Makeup", path: "/courses/makeup" },
+        { name: "Mehndi", path: "/courses/mehndi" },
+        { name: "Nutrition", path: "/courses/nutrition" },
+        { name: "Spa", path: "/courses/spa" },
+      ],
+    },
+  ];
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
         {/* LOGO */}
         <NavLink
           to="/"
-          className={`text-2xl font-bold transition ${textColor}`}
+          className={`text-2xl font-bold tracking-wide transition-all duration-300 ${textColor}`}
         >
           OraneStyle
         </NavLink>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden md:flex space-x-5 font-medium">
+        <ul className="hidden md:flex space-x-6 font-medium relative">
           {navItems.map((item, index) => (
-            <li key={index}>
+            <li key={index} className="relative group">
               <NavLink
                 to={item.path}
                 end
                 className={({ isActive }) =>
-                  `
-                  relative px-4 py-2 rounded-md flex items-center gap-1
-                  transition-all duration-300
+                  `relative px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 group
                   ${
                     isActive
-                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
-                      : `${textColor}
-                         hover:bg-white hover:text-[#631529]
-                         hover:shadow-[0_0_14px_rgba(255,255,255,0.5)]`
-                  }
-                `
+                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)] scale-105"
+                      : `${textColor} hover:bg-white hover:text-[#631529] hover:shadow-[0_0_18px_rgba(255,255,255,0.5)] hover:scale-105`
+                  }`
                 }
               >
-                {item.name}
-                {item.dropdown && <ChevronDown size={16} />}
+                <span className="flex items-center gap-1">
+                  {item.name}
+                  {item.dropdown && (
+                    <ChevronDown
+                      size={16}
+                      className="transition-transform duration-300 group-hover:rotate-180 group-hover:text-[#631529]"
+                    />
+                  )}
+                </span>
               </NavLink>
+
+              {/* DROPDOWN MENU (Desktop) */}
+              {item.name === "Courses" && (
+                <div className="absolute top-full left-0 mt-2 hidden group-hover:grid bg-white text-[#631529] rounded-lg shadow-2xl min-w-[600px] z-50 overflow-hidden grid-cols-2 transition-all duration-300">
+                  {coursesMenu.map((category, idx) => (
+                    <div key={idx} className="p-4 border-l first:border-l-0">
+                      <h4 className="text-sm font-semibold mb-2">{category.heading}</h4>
+                      {category.items.map((course, i) => (
+                        <NavLink
+                          key={i}
+                          to={course.path}
+                          className="block px-2 py-1 text-sm rounded hover:bg-[#fde7e3] hover:text-[#631529] transition-colors duration-200"
+                        >
+                          {course.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </li>
           ))}
         </ul>
 
         {/* MOBILE BUTTON */}
         <button
-          className={`md:hidden p-2 ${textColor}`}
+          className={`md:hidden p-2 transition ${textColor}`}
           onClick={() => setMobileOpen(true)}
         >
           <Menu size={26} />
@@ -103,9 +152,9 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       <aside
-        className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50
-        transform transition-transform duration-300
-        ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50 transform transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
           <span className="text-lg font-semibold">Menu</span>
@@ -116,24 +165,49 @@ export default function Navbar() {
 
         <div className="px-6 py-6 space-y-3">
           {navItems.map((item, index) => (
-            <NavLink
-              key={index}
-              to={item.path}
-              onClick={() => setMobileOpen(false)}
-              className={({ isActive }) =>
-                `
-                px-4 py-2 rounded-md flex items-center justify-between transition
-                ${
-                  isActive
+            <div key={index}>
+              <button
+                onClick={() =>
+                  item.dropdown && setMobileDropdownOpen(!mobileDropdownOpen)
+                }
+                className={`w-full text-left px-4 py-2 rounded-lg flex items-center justify-between transition-all duration-300 ${
+                  location.pathname === item.path
                     ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
                     : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
-                }
-              `
-              }
-            >
-              {item.name}
-              {item.dropdown && <ChevronDown size={16} />}
-            </NavLink>
+                }`}
+              >
+                {item.name}
+                {item.dropdown && (
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-300 ${
+                      mobileDropdownOpen ? "rotate-180 text-[#631529]" : ""
+                    }`}
+                  />
+                )}
+              </button>
+
+              {/* MOBILE DROPDOWN */}
+              {item.dropdown && item.name === "Courses" && mobileDropdownOpen && (
+                <div className="pl-4 mt-1 space-y-1 border-l border-white/20">
+                  {coursesMenu.map((category, idx) => (
+                    <div key={idx} className="mb-2">
+                      <h4 className="text-sm font-semibold mb-1">{category.heading}</h4>
+                      {category.items.map((course, i) => (
+                        <NavLink
+                          key={i}
+                          to={course.path}
+                          onClick={() => setMobileOpen(false)}
+                          className="block px-4 py-2 rounded-md text-white hover:bg-white hover:text-[#631529] transition-all duration-200"
+                        >
+                          {course.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </aside>
