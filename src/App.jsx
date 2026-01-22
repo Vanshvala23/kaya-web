@@ -7,7 +7,7 @@ import CarrerPage from "./pages/CarrerPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import LocationPageWrapper from "./pages/LocationPage";
 import BlogPageWrapper from "./pages/BlogPage"
-import FranchisePage from "./pages/FranchisePage";
+import FranchisePageWrapper from "./pages/FranchisePage";
 import Home from './pages/Home';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Route path="/location" element={<LocationPageWrapper/>}/>
         <Route path="/contact" element={<ContactUsPage/>}/>
         <Route path="/blog" element={<BlogPageWrapper/>}/>
-        <Route path="/franchise" element={<FranchisePage/>}/>
+        <Route path="/franchise" element={<FranchisePageWrapper/>}/>
       </Routes>
      </BrowserRouter>
     </>
