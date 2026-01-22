@@ -1,24 +1,38 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+
+  const isAboutPage = location.pathname === "/about-us";
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 60);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkBase =
-    "relative group flex items-center gap-1 transition-colors duration-300";
+  /* NAVBAR BACKGROUND */
+  const navbarBg = scrolled
+    ? "bg-[#631529] shadow-lg"
+    : isAboutPage
+    ? "bg-white shadow"
+    : "bg-transparent";
+
+  /* TEXT COLOR */
+  const textColor = scrolled
+    ? "text-white"
+    : isAboutPage
+    ? "text-[#631529]"
+    : "text-white";
 
   const navItems = [
-    { name: "About Us", path: "/about", dropdown: true },
+    { name: "About Us", path: "/about-us", dropdown: true },
     { name: "Courses", path: "/courses", dropdown: true },
     { name: "Franchise", path: "/franchise" },
     { name: "Location", path: "/location", dropdown: true },
@@ -30,44 +44,56 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#631529] shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <NavLink to="/" className="text-2xl font-bold text-white">
+        
+        {/* LOGO */}
+        <NavLink
+          to="/"
+          className={`text-2xl font-bold transition ${textColor}`}
+        >
           OraneStyle
         </NavLink>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex space-x-8 text-white font-medium">
+        {/* DESKTOP MENU */}
+        <ul className="hidden md:flex space-x-5 font-medium">
           {navItems.map((item, index) => (
-            <li key={index} className="relative">
+            <li key={index}>
               <NavLink
                 to={item.path}
+                end
                 className={({ isActive }) =>
-                  `${linkBase} ${isActive ? "text-[#d4af37]" : "text-white"}`
+                  `
+                  relative px-4 py-2 rounded-md flex items-center gap-1
+                  transition-all duration-300
+                  ${
+                    isActive
+                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
+                      : `${textColor}
+                         hover:bg-white hover:text-[#631529]
+                         hover:shadow-[0_0_14px_rgba(255,255,255,0.5)]`
+                  }
+                `
                 }
               >
                 {item.name}
                 {item.dropdown && <ChevronDown size={16} />}
-                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#d4af37] transition-all duration-300 group-hover:w-full" />
               </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Button */}
+        {/* MOBILE BUTTON */}
         <button
-          className="md:hidden text-white p-2"
+          className={`md:hidden p-2 ${textColor}`}
           onClick={() => setMobileOpen(true)}
         >
           <Menu size={26} />
         </button>
       </nav>
 
-      {/* OVERLAY */}
+      {/* MOBILE OVERLAY */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
           mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -75,13 +101,12 @@ export default function Navbar() {
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* RIGHT SIDE MOBILE MENU */}
+      {/* MOBILE MENU */}
       <aside
         className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50
         transform transition-transform duration-300
         ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* Close Button */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
           <span className="text-lg font-semibold">Menu</span>
           <button onClick={() => setMobileOpen(false)}>
@@ -89,14 +114,22 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Links */}
-        <div className="px-6 py-6 space-y-4">
+        <div className="px-6 py-6 space-y-3">
           {navItems.map((item, index) => (
             <NavLink
               key={index}
               to={item.path}
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-between py-2 text-white font-medium hover:text-[#d4af37] transition"
+              className={({ isActive }) =>
+                `
+                px-4 py-2 rounded-md flex items-center justify-between transition
+                ${
+                  isActive
+                    ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
+                    : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
+                }
+              `
+              }
             >
               {item.name}
               {item.dropdown && <ChevronDown size={16} />}

@@ -82,12 +82,12 @@ export default function BrandsPlacement() {
           {brands.map((logo, index) => (
             <div
               key={index}
-              className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] h-[120px] sm:h-[140px] md:h-[150px] bg-white/80 backdrop-blur rounded-[32px] md:rounded-[48px] flex items-center justify-center shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-white"
+              className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] h-[220px] sm:h-[140px] md:h-[150px] bg-white/80 backdrop-blur rounded-[32px] md:rounded-[48px] flex items-center justify-center shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-white"
             >
               <img
                 src={logo}
                 alt="Brand"
-                className="max-h-12 sm:max-h-16 md:max-h-16 object-contain grayscale hover:grayscale-0 transition duration-500"
+                className="max-h-19 sm:max-h-16 md:max-h-16 object-fill grayscale hover:grayscale-0 transition duration-500"
               />
             </div>
           ))}
