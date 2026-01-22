@@ -6,7 +6,6 @@ export default function Footer() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show arrow after scrolling past 300px (adjust as needed)
       setShowArrow(window.scrollY > 300);
     };
     window.addEventListener("scroll", handleScroll);
@@ -30,15 +29,22 @@ export default function Footer() {
     "View More",
   ];
 
-  const socialIcons = ["facebook", "x", "instagram", "youtube", "linkedin", "pinterest"];
+  const socialIcons = [
+    "facebook",
+    "x",
+    "instagram",
+    "youtube",
+    "linkedin",
+    "pinterest",
+  ];
 
   return (
     <footer className="bg-white text-gray-800 border-t relative">
 
-      {/* Main Footer */}
+      {/* MAIN FOOTER */}
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
 
-        {/* Quick Links */}
+        {/* QUICK LINKS */}
         <div>
           <h4 className="font-semibold text-lg mb-6">Quick Links</h4>
           <ul className="space-y-3 text-sm">
@@ -53,7 +59,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Courses */}
+        {/* COURSES */}
         <div>
           <h4 className="font-semibold text-lg mb-6">Courses</h4>
           <ul className="space-y-3 text-sm">
@@ -68,7 +74,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Office Canada */}
+        {/* OFFICE CANADA */}
         <div>
           <h4 className="font-semibold text-lg mb-6 flex items-center gap-2">
             🇨🇦 Office Canada
@@ -98,7 +104,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Office India */}
+        {/* OFFICE INDIA */}
         <div>
           <h4 className="font-semibold text-lg mb-6 flex items-center gap-2">
             🇮🇳 Office India
@@ -108,7 +114,8 @@ export default function Footer() {
             <li className="flex gap-3">
               <MapPin size={18} />
               <span>
-                SCO 88–92 Sector 82, JLPL Industrial Area, Airport Road, Sahibzada Ajit Singh Nagar, Punjab 140308
+                SCO 88–92 Sector 82, JLPL Industrial Area, Airport Road,
+                Sahibzada Ajit Singh Nagar, Punjab 140308
               </span>
             </li>
 
@@ -123,7 +130,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* BOTTOM BAR */}
       <div className="border-t py-6 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
 
@@ -134,12 +141,14 @@ export default function Footer() {
             <span className="text-[#631529] font-medium">Steline Infotech</span>
           </p>
 
-          {/* Social Icons */}
+          {/* SOCIAL ICONS */}
           <div className="flex gap-3 md:gap-4">
             {socialIcons.map((icon) => (
               <div
                 key={icon}
-                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#631529] hover:text-white transition cursor-pointer text-sm font-bold"
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
+                hover:bg-[#631529] hover:text-white transition cursor-pointer
+                text-sm font-bold"
               >
                 {icon[0].toUpperCase()}
               </div>
@@ -147,13 +156,17 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-6 flex-wrap justify-center md:justify-end">
-            <span className="cursor-pointer hover:text-[#631529]">Disclaimer</span>
-            <span className="cursor-pointer hover:text-[#631529]">Privacy Policy</span>
+            <span className="cursor-pointer hover:text-[#631529]">
+              Disclaimer
+            </span>
+            <span className="cursor-pointer hover:text-[#631529]">
+              Privacy Policy
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Back to top */}
+      {/* BACK TO TOP BUTTON */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className={`
@@ -161,10 +174,10 @@ export default function Footer() {
           w-12 h-12 rounded-full
           bg-[#8b2e3e] text-white
           flex items-center justify-center
-          shadow-lg hover:scale-110 transition
-          ${showArrow ? "opacity-100" : "opacity-0 pointer-events-none"}
+          transition-all duration-300
+          hover:scale-110
+          ${showArrow ? "opacity-100 glow-pulse" : "opacity-0 pointer-events-none"}
         `}
-        style={{ transition: "opacity 0.5s" }}
       >
         <ArrowUp />
       </button>
