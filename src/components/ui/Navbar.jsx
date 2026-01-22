@@ -28,7 +28,6 @@ export default function Navbar() {
     ? "text-white"
     : "text-[#631529]";
 
-  // Main nav items
   const navItems = [
     { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
@@ -40,7 +39,6 @@ export default function Navbar() {
     { name: "Testimonials", path: "/testimonials" },
   ];
 
-  // Courses dropdown with categories for multi-column
   const coursesMenu = [
     {
       heading: "Advanced Aesthetic Courses",
@@ -78,11 +76,8 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
-    >
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}>
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* LOGO */}
         <NavLink
           to="/"
           className={`text-2xl font-bold tracking-wide transition-all duration-300 ${textColor}`}
@@ -90,7 +85,7 @@ export default function Navbar() {
           OraneStyle
         </NavLink>
 
-        {/* DESKTOP MENU */}
+        {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 font-medium relative">
           {navItems.map((item, index) => (
             <li key={index} className="relative group">
@@ -117,7 +112,6 @@ export default function Navbar() {
                 </span>
               </NavLink>
 
-              {/* DROPDOWN MENU (Desktop) */}
               {item.name === "Courses" && (
                 <div className="absolute top-full left-0 mt-2 hidden group-hover:grid bg-white text-[#631529] rounded-lg shadow-2xl min-w-[600px] z-50 overflow-hidden grid-cols-2 transition-all duration-300">
                   {coursesMenu.map((category, idx) => (
@@ -140,24 +134,19 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* MOBILE BUTTON */}
-        <button
-          className={`md:hidden p-2 transition ${textColor}`}
-          onClick={() => setMobileOpen(true)}
-        >
+        {/* Mobile Button */}
+        <button className={`md:hidden p-2 transition ${textColor}`} onClick={() => setMobileOpen(true)}>
           <Menu size={26} />
         </button>
       </nav>
 
-      {/* MOBILE OVERLAY */}
+      {/* Mobile Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* MOBILE MENU */}
+      {/* Mobile Menu */}
       <aside
         className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50 transform transition-transform duration-300 ease-in-out ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
@@ -173,46 +162,61 @@ export default function Navbar() {
         <div className="px-6 py-6 space-y-3">
           {navItems.map((item, index) => (
             <div key={index}>
-              <button
-                onClick={() =>
-                  item.dropdown && toggleMobileDropdown(item.name)
-                }
-                className={`w-full text-left px-4 py-2 rounded-lg flex items-center justify-between transition-all duration-300 ${
-                  location.pathname === item.path
-                    ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
-                    : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
-                }`}
-              >
-                {item.name}
-                {item.dropdown && (
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-300 ${
-                      mobileDropdowns[item.name] ? "rotate-180 text-[#631529]" : ""
+              {/* If dropdown, use button to toggle, else use NavLink */}
+              {!item.dropdown ? (
+                <NavLink
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${
+                    location.pathname === item.path
+                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
+                      : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
+                  }`}
+                >
+                  {item.name}
+                </NavLink>
+              ) : (
+                <>
+                  <button
+                    onClick={() => toggleMobileDropdown(item.name)}
+                    className={`w-full text-left px-4 py-2 rounded-lg flex items-center justify-between transition-all duration-300 ${
+                      location.pathname === item.path
+                        ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
+                        : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
                     }`}
-                  />
-                )}
-              </button>
+                  >
+                    {item.name}
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${
+                        mobileDropdowns[item.name] ? "rotate-180 text-[#631529]" : ""
+                      }`}
+                    />
+                  </button>
 
-              {/* MOBILE DROPDOWN */}
-              {item.dropdown && item.name === "Courses" && mobileDropdowns[item.name] && (
-                <div className="pl-4 mt-1 space-y-1 border-l border-white/20">
-                  {coursesMenu.map((category, idx) => (
-                    <div key={idx} className="mb-2">
-                      <h4 className="text-sm font-semibold mb-1">{category.heading}</h4>
-                      {category.items.map((course, i) => (
-                        <NavLink
-                          key={i}
-                          to={course.path}
-                          onClick={() => setMobileOpen(false)}
-                          className="block px-4 py-2 rounded-md text-white hover:bg-white hover:text-[#631529] transition-all duration-200"
-                        >
-                          {course.name}
-                        </NavLink>
-                      ))}
+                  {/* Dropdown items */}
+                  {mobileDropdowns[item.name] && (
+                    <div className="pl-4 mt-1 space-y-1 border-l border-white/20">
+                      {item.name === "Courses"
+                        ? coursesMenu.map((category, idx) => (
+                            <div key={idx} className="mb-2">
+                              <h4 className="text-sm font-semibold mb-1">{category.heading}</h4>
+                              {category.items.map((course, i) => (
+                                <NavLink
+                                  key={i}
+                                  to={course.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="block px-4 py-2 rounded-md text-white hover:bg-white hover:text-[#631529] transition-all duration-200"
+                                >
+                                  {course.name}
+                                </NavLink>
+                              ))}
+                            </div>
+                          ))
+                        : null}
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               )}
             </div>
           ))}
