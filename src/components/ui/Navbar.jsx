@@ -28,13 +28,14 @@ export default function Navbar() {
     ? "text-white"
     : "text-[#631529]";
 
+  /* ✅ FIXED: dropdown only where needed */
   const navItems = [
     { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
     { name: "Franchise", path: "/franchise" },
-    { name: "Location", path: "/location", dropdown: true },
-    { name: "Career", path: "/career", dropdown: true },
-    { name: "Blog", path: "/blog", dropdown: true },
+    { name: "Location", path: "/location" },
+    { name: "Career", path: "/career" },
+    { name: "Blog", path: "/blog" },
     { name: "Contact Us", path: "/contact" },
     { name: "Testimonials", path: "/testimonials" },
   ];
@@ -78,52 +79,41 @@ export default function Navbar() {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}>
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <NavLink
-          to="/"
-          className={`text-2xl font-bold tracking-wide transition-all duration-300 ${textColor}`}
-        >
+        <NavLink to="/" className={`text-2xl font-bold ${textColor}`}>
           OraneStyle
         </NavLink>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 font-medium relative">
-          {navItems.map((item, index) => (
-            <li key={index} className="relative group">
+        {/* ================= DESKTOP MENU ================= */}
+        <ul className="hidden md:flex space-x-6 font-medium">
+          {navItems.map((item) => (
+            <li key={item.name} className="relative group">
               <NavLink
                 to={item.path}
-                end
                 className={({ isActive }) =>
-                  `relative px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 group
-                  ${
+                  `px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 ${
                     isActive
-                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)] scale-105"
-                      : `${textColor} hover:bg-white hover:text-[#631529] hover:shadow-[0_0_18px_rgba(255,255,255,0.5)] hover:scale-105`
+                      ? "bg-white text-[#631529] shadow-md"
+                      : `${textColor} hover:bg-white hover:text-[#631529]`
                   }`
                 }
               >
-                <span className="flex items-center gap-1">
-                  {item.name}
-                  {item.dropdown && (
-                    <ChevronDown
-                      size={16}
-                      className="transition-transform duration-300 group-hover:rotate-180 group-hover:text-[#631529]"
-                    />
-                  )}
-                </span>
+                {item.name}
+                {item.dropdown && <ChevronDown size={16} />}
               </NavLink>
 
+              {/* Desktop Courses Dropdown */}
               {item.name === "Courses" && (
-                <div className="absolute top-full left-0 mt-2 hidden group-hover:grid bg-white text-[#631529] rounded-lg shadow-2xl min-w-[600px] z-50 overflow-hidden grid-cols-2 transition-all duration-300">
-                  {coursesMenu.map((category, idx) => (
-                    <div key={idx} className="p-4 border-l first:border-l-0">
-                      <h4 className="text-sm font-semibold mb-2">{category.heading}</h4>
-                      {category.items.map((course, i) => (
+                <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-2 min-w-[600px] bg-white text-[#631529] rounded-xl shadow-xl">
+                  {coursesMenu.map((cat) => (
+                    <div key={cat.heading} className="p-4 border-l first:border-l-0">
+                      <h4 className="font-semibold mb-2">{cat.heading}</h4>
+                      {cat.items.map((c) => (
                         <NavLink
-                          key={i}
-                          to={course.path}
-                          className="block px-2 py-1 text-sm rounded hover:bg-[#fde7e3] hover:text-[#631529] transition-colors duration-200"
+                          key={c.name}
+                          to={c.path}
+                          className="block px-2 py-1 rounded hover:bg-[#fde7e3]"
                         >
-                          {course.name}
+                          {c.name}
                         </NavLink>
                       ))}
                     </div>
@@ -134,92 +124,89 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile Button */}
-        <button className={`md:hidden p-2 transition ${textColor}`} onClick={() => setMobileOpen(true)}>
+        {/* ================= MOBILE BUTTON ================= */}
+        <button className={`md:hidden ${textColor}`} onClick={() => setMobileOpen(true)}>
           <Menu size={26} />
         </button>
       </nav>
 
-      {/* Mobile Overlay */}
+      {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+        className={`fixed inset-0 bg-black/50 z-40 ${mobileOpen ? "block" : "hidden"}`}
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* Mobile Menu */}
+      {/* ================= MOBILE MENU ================= */}
       <aside
-        className={`fixed top-0 right-0 h-screen w-72 bg-[#631529] text-white z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-72 bg-[#631529] text-white z-50 transition-transform duration-300 ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
-          <span className="text-lg font-semibold">Menu</span>
+        <div className="flex justify-between items-center px-6 py-4 border-b border-white/20">
+          <span className="font-semibold text-lg">Menu</span>
           <button onClick={() => setMobileOpen(false)}>
             <X size={24} />
           </button>
         </div>
 
         <div className="px-6 py-6 space-y-3">
-          {navItems.map((item, index) => (
-            <div key={index}>
-              {/* If dropdown, use button to toggle, else use NavLink */}
-              {!item.dropdown ? (
-                <NavLink
-                  to={item.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${
-                    location.pathname === item.path
-                      ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
-                      : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
-                  }`}
-                >
-                  {item.name}
-                </NavLink>
-              ) : (
-                <>
-                  <button
-                    onClick={() => toggleMobileDropdown(item.name)}
-                    className={`w-full text-left px-4 py-2 rounded-lg flex items-center justify-between transition-all duration-300 ${
-                      location.pathname === item.path
-                        ? "bg-white text-[#631529] shadow-[0_0_12px_rgba(255,255,255,0.6)]"
-                        : "text-white hover:bg-white hover:text-[#631529] hover:shadow-[0_0_12px_rgba(255,255,255,0.5)]"
-                    }`}
+          {navItems.map((item) =>
+            item.dropdown ? (
+              <div key={item.name}>
+                <div className="flex gap-2">
+                  {/* Navigate */}
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 px-4 py-2 rounded-lg hover:bg-white hover:text-[#631529]"
                   >
                     {item.name}
+                  </NavLink>
+
+                  {/* Dropdown Toggle */}
+                  <button
+                    onClick={() => toggleMobileDropdown(item.name)}
+                    className="px-3 rounded-lg hover:bg-white/20"
+                  >
                     <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-300 ${
-                        mobileDropdowns[item.name] ? "rotate-180 text-[#631529]" : ""
+                      className={`transition-transform ${
+                        mobileDropdowns[item.name] ? "rotate-180" : ""
                       }`}
                     />
                   </button>
+                </div>
 
-                  {/* Dropdown items */}
-                  {mobileDropdowns[item.name] && (
-                    <div className="pl-4 mt-1 space-y-1 border-l border-white/20">
-                      {item.name === "Courses"
-                        ? coursesMenu.map((category, idx) => (
-                            <div key={idx} className="mb-2">
-                              <h4 className="text-sm font-semibold mb-1">{category.heading}</h4>
-                              {category.items.map((course, i) => (
-                                <NavLink
-                                  key={i}
-                                  to={course.path}
-                                  onClick={() => setMobileOpen(false)}
-                                  className="block px-4 py-2 rounded-md text-white hover:bg-white hover:text-[#631529] transition-all duration-200"
-                                >
-                                  {course.name}
-                                </NavLink>
-                              ))}
-                            </div>
-                          ))
-                        : null}
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          ))}
+                {mobileDropdowns[item.name] && (
+                  <div className="pl-4 mt-2 border-l border-white/20">
+                    {coursesMenu.map((cat) => (
+                      <div key={cat.heading}>
+                        <h4 className="text-sm font-semibold mt-2">{cat.heading}</h4>
+                        {cat.items.map((c) => (
+                          <NavLink
+                            key={c.name}
+                            to={c.path}
+                            onClick={() => setMobileOpen(false)}
+                            className="block px-4 py-2 rounded hover:bg-white hover:text-[#631529]"
+                          >
+                            {c.name}
+                          </NavLink>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-2 rounded-lg hover:bg-white hover:text-[#631529]"
+              >
+                {item.name}
+              </NavLink>
+            )
+          )}
         </div>
       </aside>
     </header>
