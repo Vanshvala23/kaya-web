@@ -99,7 +99,7 @@ export default function Footer() {
             </li>
 
             <li className="flex gap-3">
-              <Mail size={18} /> info@orane.ca
+              <Mail size={18} /> info@PureReviev.ca
             </li>
           </ul>
         </div>
@@ -120,7 +120,7 @@ export default function Footer() {
             </li>
 
             <li className="flex gap-3">
-              <Mail size={18} /> info@orane.com
+              <Mail size={18} /> info@PureReviev.com
             </li>
 
             <li className="flex gap-3">
@@ -135,7 +135,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
 
           <p className="text-center md:text-left">
-            © 2026 Orane International Private Limited. All Rights Reserved.
+            © 2026 PureReviev International Private Limited. All Rights Reserved.
             <br />
             Website designed by{" "}
             <span className="text-[#631529] font-medium">Steline Infotech</span>

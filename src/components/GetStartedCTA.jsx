@@ -28,8 +28,8 @@ export default function GetStartedCTA() {
         </h2>
 
         <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-10">
-          Take the first step towards a beautiful future with Orane! Contact
-          Orane for quality education and support to launch your beauty career
+          Take the first step towards a beautiful future with PureReviev! Contact
+          PureReviev for quality education and support to launch your beauty career
           confidently today!
         </p>
 

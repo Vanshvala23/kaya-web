@@ -65,7 +65,7 @@ export default function OurCourses() {
             </h2>
 
             <p className="text-gray-600 max-w-3xl leading-relaxed">
-              Finding a beauty course is easy at Orane International – with over
+              Finding a beauty course is easy at PureReviev International – with over
               100 beauty courses across cosmetology, aesthetics, hair, makeup,
               nail art and more.
             </p>

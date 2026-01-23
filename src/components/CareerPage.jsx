@@ -185,7 +185,7 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Application Sent!</h3>
               <p className="text-gray-600 mb-8 px-4">
-                Thanks for applying to Orane. Our HR team will review your profile and get back to you shortly.
+                Thanks for applying to PureReviev. Our HR team will review your profile and get back to you shortly.
               </p>
               <button onClick={onClose} className="text-[#631529] font-bold hover:underline py-2">
                 Close Window
@@ -269,7 +269,7 @@ export default function CareerPage() {
               Why Work With Us?
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-              We believe in growing together. Here's what you can expect when you join the Orane family.
+              We believe in growing together. Here's what you can expect when you join the PureReviev family.
             </p>
           </div>
 
@@ -389,13 +389,13 @@ export default function CareerPage() {
               We are always on the lookout for talent. Send your resume to our HR team and we'll keep you on file for future openings.
             </p>
             <a 
-              href="mailto:careers@orane.com"
+              href="mailto:careers@PureReviev.com"
               className="inline-flex items-center gap-2 bg-[#631529] text-white px-8 py-3.5 md:px-8 md:py-4 rounded-full font-bold hover:bg-[#4a101f] transition shadow-lg transform active:scale-95"
             >
               Email Your Resume <ArrowRight size={20} />
             </a>
             <p className="mt-4 text-sm text-gray-400">
-              hr@orane.com
+              hr@PureReviev.com
             </p>
           </div>
         </div>
