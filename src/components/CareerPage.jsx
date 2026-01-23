@@ -19,6 +19,7 @@ import {
 
 import axios from 'axios';
 import careerBg from "../assets/vision.jpg"; 
+import toast from "react-hot-toast";
 
 // MOCK DATA- JOBS
 const jobsData = [
@@ -124,6 +125,7 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
       data.append("phone", formData.phone);
       data.append("jobTitle", jobTitle);
       if (formData.resume) data.append("resume", formData.resume);
+      const toastId = toast.loading("Submitting...");
 
       // Replace the URL with your backend API endpoint
       await axios.post("https://kaya-server.vercel.app/api/career", data, {
@@ -131,9 +133,10 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
       });
 
       setStep(2); // Show success step
+      toast.success("Application submitted successfully!", { id: toastId });
     } catch (err) {
       console.error(err);
-      alert("There was an error submitting your application. Please try again.");
+      toast.error("Submission failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
