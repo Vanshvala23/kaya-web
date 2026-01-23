@@ -95,7 +95,7 @@ export default function HeroSlider() {
               src={slide.image}
               alt={slide.title}
               style={{ objectPosition: slide.position }}
-              className="absolute inset-0 w-full h-full object-cover brightness-120 saturate-200"
+              className="absolute inset-0 w-full h-full object-cover brightness-130 contrast-125 saturate-200"
             />
 
             <div className="absolute inset-0 bg-black/50 sm:bg-gradient-to-r sm:from-black/70 sm:via-black/40 sm:to-black/10" />
