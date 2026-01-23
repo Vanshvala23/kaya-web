@@ -31,28 +31,28 @@ const departments = [
     name: "Admissions Team",
     desc: "For course details, fees, and enrollment.",
     phone: "+91 8872 500 500",
-    email: "admissions@PureReviev.com"
+    email: "admissions@PureRevive.com"
   },
   {
     icon: Users,
     name: "Student Support",
     desc: "For existing students, exams, and certification.",
     phone: "+91 8872 500 501",
-    email: "support@PureReviev.com"
+    email: "support@PureRevive.com"
   },
   {
     icon: Building2,
     name: "Franchise Inquiry",
     desc: "For business partnership opportunities.",
     phone: "+91 9876 543 210",
-    email: "franchise@PureReviev.com"
+    email: "franchise@PureRevive.com"
   },
   {
     icon: Briefcase,
     name: "HR & Careers",
     desc: "For job applications and recruitment.",
     phone: "0172 500 500",
-    email: "hr@PureReviev.com"
+    email: "hr@PureRevive.com"
   }
 ];
 
@@ -163,9 +163,9 @@ export default function ContactPage() {
           <ContactCard 
             icon={Mail} 
             title="Email Us" 
-            info="info@PureReviev.com" 
+            info="info@PureRevive.com" 
             subInfo="We reply within 24 hours"
-            action="mailto:info@PureReviev.com"
+            action="mailto:info@PureRevive.com"
             actionLabel="Send Email"
           />
           <ContactCard 
@@ -348,20 +348,20 @@ export default function ContactPage() {
               <div className="bg-white rounded-3xl overflow-hidden h-80 lg:h-96 shadow-sm border border-gray-200 mb-8 relative group">
                 {/* Embed Google Map Iframe */}
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.347572765366!2d76.7038!3d30.6758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fe8d61741d401%3A0x6097892336332145!2sPureReviev%20International%20Head%20Office!5e0!3m2!1sen!2sin!4v1625637289123!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.347572765366!2d76.7038!3d30.6758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fe8d61741d401%3A0x6097892336332145!2sPureRevive%20International%20Head%20Office!5e0!3m2!1sen!2sin!4v1625637289123!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{border:0}} 
                   allowFullScreen="" 
                   loading="lazy"
-                  title="PureReviev Head Office Map"
+                  title="PureRevive Head Office Map"
                   className="grayscale group-hover:grayscale-0 transition-all duration-700"
                 ></iframe>
                 
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg flex items-start gap-3">
                   <MapPin className="text-[#631529] shrink-0 mt-1" size={20} />
                   <div>
-                    <h4 className="font-bold text-gray-900 text-sm">PureReviev International Head Office</h4>
+                    <h4 className="font-bold text-gray-900 text-sm">PureRevive International Head Office</h4>
                     <p className="text-xs text-gray-600 mt-1 leading-snug">SCO 88-92, Sector 82, JLPL Industrial Area, Mohali, Punjab 140308</p>
                   </div>
                 </div>
@@ -397,7 +397,7 @@ export default function ContactPage() {
                 Are you an existing student facing issues? We take your concerns seriously. Please reach out to our dedicated grievance cell.
               </p>
               <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-bold">
-                 <a href="mailto:grievance@PureReviev.com" className="text-red-600 hover:underline">grievance@PureReviev.com</a>
+                 <a href="mailto:grievance@PureRevive.com" className="text-red-600 hover:underline">grievance@PureRevive.com</a>
                  <span className="text-gray-300">|</span>
                  <span className="text-gray-700">+91 1234 567 890</span>
               </div>

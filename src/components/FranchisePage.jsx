@@ -157,7 +157,7 @@ export default function FranchisePage() {
             Beauty Academy
           </h1>
           <p className="text-lg text-white/80 max-w-2xl mx-auto mb-10">
-            Build a profitable education business with PureReviev.
+            Build a profitable education business with PureRevive.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">

@@ -7,7 +7,7 @@ import visionImage from "../assets/vision.jpg";
 export default function AboutUs() {
   const navigate=useNavigate();
   useEffect(() => {
-    document.title = "About Us | PureReviev";
+    document.title = "About Us | PureRevive";
   }, []);
 
   return (
@@ -28,7 +28,7 @@ export default function AboutUs() {
             <p className="mt-4 sm:mt-6 text-gray-700 leading-relaxed text-sm sm:text-base max-w-xl">
               Skilling is the key to a better India where youth will have a safe and
               better future with better career opportunities. With this thought in
-              mind, <span className="text-[#631529] font-medium">PureReviev International</span> was
+              mind, <span className="text-[#631529] font-medium">PureRevive International</span> was
               conceptualised in 1999. We offer skill-based courses to empower youth!
             </p>
 
@@ -93,11 +93,11 @@ export default function AboutUs() {
             </h2>
 
             <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
-              Envisioning the global demand for trained beauty professionals, PureReviev International was incorporated in 1999. The visionary founders of PureReviev International travelled to various countries to study global trends such as demographic profiling & market demand in the beauty & wellness domain.
+              Envisioning the global demand for trained beauty professionals, PureRevive International was incorporated in 1999. The visionary founders of PureRevive International travelled to various countries to study global trends such as demographic profiling & market demand in the beauty & wellness domain.
             </p>
 
             <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-              The decision to focus on India as the first location was strategic, given the country’s significant shortage of skilled labour and lack of formal skill education. With a booming economy and large youth population, India proved ideal for PureReviev International’s inauguration.
+              The decision to focus on India as the first location was strategic, given the country’s significant shortage of skilled labour and lack of formal skill education. With a booming economy and large youth population, India proved ideal for PureRevive International’s inauguration.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export default function AboutUs() {
           Our Mission
         </span>
         <p className="text-sm sm:text-base leading-relaxed text-gray-100">
-          Empowering Aspiring Youth. At PureReviev International, our mission is clear: We are confident that quality, skill-based learning in the beauty and wellness industry will ignite the future. Whether you dream of becoming a makeup artist, a cosmetologist, or a nutrition expert, we're here to guide you.
+          Empowering Aspiring Youth. At PureRevive International, our mission is clear: We are confident that quality, skill-based learning in the beauty and wellness industry will ignite the future. Whether you dream of becoming a makeup artist, a cosmetologist, or a nutrition expert, we're here to guide you.
         </p>
       </div>
 
@@ -160,7 +160,7 @@ export default function AboutUs() {
           Our Vision
         </span>
         <p className="text-sm sm:text-base leading-relaxed text-gray-100">
-          A Global Beacon of Excellence. Our vision is deeply woven into our DNA. We envision PureReviev as a global beacon of excellence—a place where creativity, innovation, and skill converge. We see a world where our trained students lead the industry, shaping trends.
+          A Global Beacon of Excellence. Our vision is deeply woven into our DNA. We envision PureRevive as a global beacon of excellence—a place where creativity, innovation, and skill converge. We see a world where our trained students lead the industry, shaping trends.
         </p>
       </div>
     </div>

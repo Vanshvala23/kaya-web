@@ -89,7 +89,7 @@ export default function Footer() {
               </span>
             </li>
             <li className="flex gap-3"><Phone size={18} /> +1 (604)-123-456</li>
-            <li className="flex gap-3"><Mail size={18} /> info@PureReviev.ca</li>
+            <li className="flex gap-3"><Mail size={18} /> info@PureRevive.ca</li>
           </ul>
         </div>
 
@@ -104,7 +104,7 @@ export default function Footer() {
                 Airport Road, Punjab 140308
               </span>
             </li>
-            <li className="flex gap-3"><Mail size={18} /> info@PureReviev.com</li>
+            <li className="flex gap-3"><Mail size={18} /> info@PureRevive.com</li>
             <li className="flex gap-3"><Phone size={18} /> +91 123 456 7890</li>
           </ul>
         </div>
@@ -115,7 +115,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
 
           <p>
-            © 2026 PureReviev International Pvt. Ltd.
+            © 2026 PureRevive International Pvt. Ltd.
             <br />
             Designed by <span className="text-[#631529] font-medium">Steline Infotech</span>
           </p>

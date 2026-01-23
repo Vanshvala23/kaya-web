@@ -80,7 +80,7 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}>
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <NavLink to="/" className={`text-2xl font-bold ${textColor}`}>
-          PureReviev
+          PureRevive
         </NavLink>
 
         {/* ================= DESKTOP MENU ================= */}

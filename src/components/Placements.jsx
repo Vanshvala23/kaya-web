@@ -195,7 +195,7 @@ export default function Placements() {
                 </h3>
 
                 <p className="text-center text-xs text-gray-600 leading-relaxed">
-                  Student of PureReviev International, for getting placed in{" "}
+                  Student of PureRevive International, for getting placed in{" "}
                   <strong>{item.course}</strong>
                 </p>
 

@@ -6,7 +6,7 @@ const newsItems = [
   "Get Certified in 45 Days | Limited Seats Available",
   "New Online Professional Courses Launched",
   "Enroll Today & Start Your Beauty Career",
-  "PureReviev Certified Courses Recognized Pan India",
+  "PureRevive Certified Courses Recognized Pan India",
 ];
 
 export default function NewsTicker() {

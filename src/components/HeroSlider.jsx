@@ -10,7 +10,7 @@ const slides = [
   {
     image: bridal1,
     position: "85% 30%",
-    tag: "PureReviev Goes Online!",
+    tag: "PureRevive Goes Online!",
     title: "Complete Bridal Makeup & Hairstyling Course",
     subtitle: "Get Certified in 45 Days",
     meta: ["Course Fee: ₹50,000 Only"],

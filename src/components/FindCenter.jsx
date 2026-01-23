@@ -18,12 +18,12 @@ export default function FindCenter() {
         {/* LEFT */}
         <div className="flex-1 flex flex-col justify-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-normal leading-snug mb-4 text-black">
-            Find PureReviev Near You – <br />
+            Find PureRevive Near You – <br />
             Start Learning Today!
           </h2>
 
           <p className="text-[#39414d] text-base sm:text-lg mb-6 md:mb-8">
-            Locate the closest PureReviev International center <br />
+            Locate the closest PureRevive International center <br />
             anywhere in India.
           </p>
 
@@ -46,7 +46,7 @@ export default function FindCenter() {
         <div className="flex-1 mt-8 lg:mt-0">
           <img
             src={centerImg}
-            alt="PureReviev Center"
+            alt="PureRevive Center"
             className="rounded-[24px] w-full h-full object-cover"
           />
         </div>
