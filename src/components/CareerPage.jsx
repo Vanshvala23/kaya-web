@@ -234,7 +234,7 @@ export default function CareerPage() {
           <img 
             src={careerBg} 
             alt="Career Background" 
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover saturate-200 opacity-60 [object-position:50%_20%]"
           />
         </div>
         
