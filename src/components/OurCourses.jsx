@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import {useNavigate} from "react-router-dom";
 
 import c1 from "../assets/c1.jpg";
 import c2 from "../assets/c2.jpg";
@@ -19,6 +20,7 @@ const AUTO_DELAY = 3000;
 export default function OurCourses() {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
+  const navigate=useNavigate();
 
   const maxIndex = courses.length - 3; // desktop
 
@@ -71,7 +73,9 @@ export default function OurCourses() {
             </p>
           </div>
 
-          <a href="/courses" className="text-[#631529] font-semibold hover:underline">
+          <a onClick={()=>{
+            return navigate("/courses");
+          }} className="text-[#631529] font-semibold hover:underline cursor-pointer">
             View All Programs → 
           </a>
         </div>
