@@ -17,6 +17,7 @@ import {
   FileText
 } from "lucide-react";
 
+import axios from 'axios';
 import careerBg from "../assets/vision.jpg"; 
 
 // MOCK DATA- JOBS
@@ -83,29 +84,59 @@ const jobsData = [
   }
 ];
 
-// COMPONENTS
+// ------------------- APPLICATION MODAL -------------------
 
 const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
   const [step, setStep] = useState(1); // 1: Form, 2: Success
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    resume: null
+  });
 
   if (!isOpen) return null;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleFileChange = (e) => {
     if (e.target.files.length > 0) {
       setFileName(e.target.files[0].name);
+      setFormData(prev => ({ ...prev, resume: e.target.files[0] }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API
-    setTimeout(() => {
+
+    try {
+      const data = new FormData();
+      data.append("firstName", formData.firstName);
+      data.append("lastName", formData.lastName);
+      data.append("email", formData.email);
+      data.append("phone", formData.phone);
+      data.append("jobTitle", jobTitle);
+      if (formData.resume) data.append("resume", formData.resume);
+
+      // Replace the URL with your backend API endpoint
+      await axios.post("http://localhost:5000/api/career", data, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+
+      setStep(2); // Show success step
+    } catch (err) {
+      console.error(err);
+      alert("There was an error submitting your application. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setStep(2);
-    }, 2000);
+    }
   };
 
   return (
@@ -128,22 +159,50 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-gray-500 uppercase">First Name</label>
-                  <input required type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
+                  <input 
+                    required 
+                    type="text" 
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" 
+                  />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-gray-500 uppercase">Last Name</label>
-                  <input required type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
+                  <input 
+                    required 
+                    type="text" 
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" 
+                  />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-gray-500 uppercase">Email Address</label>
-                <input required type="email" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
+                <input 
+                  required 
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" 
+                />
               </div>
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-gray-500 uppercase">Phone Number</label>
-                <input required type="tel" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
+                <input 
+                  required 
+                  type="tel" 
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" 
+                />
               </div>
 
               {/* Resume Upload */}
@@ -164,7 +223,7 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
                     <>
                       <Upload className="mx-auto text-gray-400 mb-2" size={24} />
                       <p className="text-sm text-gray-500 font-medium">Tap to upload resume</p>
-                      <p className="text-xs text-gray-400 mt-1">PDF, DOCX (Max 5MB)</p>
+                      <p className="text-xs text-gray-400 mt-1">PDF, DOCX</p>
                     </>
                   )}
                 </div>
@@ -197,6 +256,8 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
     </div>
   );
 };
+
+// ------------------- CAREER PAGE -------------------
 
 export default function CareerPage() {
   const [searchTerm, setSearchTerm] = useState("");
