@@ -71,7 +71,7 @@ export default function OurCourses() {
             </p>
           </div>
 
-          <a href="#" className="text-[#631529] font-semibold hover:underline">
+          <a href="/courses" className="text-[#631529] font-semibold hover:underline">
             View All Programs → 
           </a>
         </div>
