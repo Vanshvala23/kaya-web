@@ -28,13 +28,12 @@ export default function Navbar() {
     ? "text-white"
     : "text-[#631529]";
 
-  /* ✅ FIXED: dropdown only where needed */
   const navItems = [
     { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
     { name: "Franchise", path: "/franchise" },
     { name: "Location", path: "/location" },
-    { name: "Career", path: "/career" },
+    { name: "Career", path: "/career", dropdown: true },
     { name: "Blog", path: "/blog" },
     { name: "Contact Us", path: "/contact" },
     { name: "Testimonials", path: "/testimonials" },
@@ -69,6 +68,13 @@ export default function Navbar() {
     },
   ];
 
+  const careerMenu = [
+    {
+      heading: "Career Opportunities",
+      items: [{ name: "Placement Support", path: "/career/placement-support" }],
+    },
+  ];
+
   const toggleMobileDropdown = (name) => {
     setMobileDropdowns((prev) => ({
       ...prev,
@@ -92,7 +98,7 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 ${
                     isActive
-                      ? "bg-white text-[#631529] shadow-md"
+                      ? "bg-white text-[#631529] shadow-md shadow-white/50"
                       : `${textColor} hover:bg-white hover:text-[#631529]`
                   }`
                 }
@@ -101,17 +107,37 @@ export default function Navbar() {
                 {item.dropdown && <ChevronDown size={16} />}
               </NavLink>
 
-              {/* Desktop Courses Dropdown */}
+              {/* ================= DESKTOP COURSES DROPDOWN ================= */}
               {item.name === "Courses" && (
-                <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-2 min-w-[600px] bg-white text-[#631529] rounded-xl shadow-xl">
+                <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-2 min-w-[600px] bg-white text-[#631529] rounded-xl shadow-xl p-4 gap-4">
                   {coursesMenu.map((cat) => (
-                    <div key={cat.heading} className="p-4 border-l first:border-l-0">
+                    <div key={cat.heading} className="flex flex-col gap-2">
                       <h4 className="font-semibold mb-2">{cat.heading}</h4>
                       {cat.items.map((c) => (
                         <NavLink
                           key={c.name}
                           to={c.path}
-                          className="block px-2 py-1 rounded hover:bg-[#fde7e3]"
+                          className="block px-3 py-2 rounded-lg hover:bg-[#fde7e3] hover:shadow-lg transition-all duration-300"
+                        >
+                          {c.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* ================= DESKTOP CAREER DROPDOWN ================= */}
+              {item.name === "Career" && (
+                <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-1 min-w-[300px] bg-white text-[#631529] rounded-xl shadow-xl p-4 gap-2">
+                  {careerMenu.map((cat) => (
+                    <div key={cat.heading} className="flex flex-col gap-2">
+                      <h4 className="font-semibold mb-2">{cat.heading}</h4>
+                      {cat.items.map((c) => (
+                        <NavLink
+                          key={c.name}
+                          to={c.path}
+                          className="block px-3 py-2 rounded-lg hover:bg-[#fde7e3] hover:shadow-lg transition-all duration-300"
                         >
                           {c.name}
                         </NavLink>
@@ -130,7 +156,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Overlay */}
+      {/* ================= OVERLAY ================= */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 ${mobileOpen ? "block" : "hidden"}`}
         onClick={() => setMobileOpen(false)}
@@ -154,7 +180,6 @@ export default function Navbar() {
             item.dropdown ? (
               <div key={item.name}>
                 <div className="flex gap-2">
-                  {/* Navigate */}
                   <NavLink
                     to={item.path}
                     onClick={() => setMobileOpen(false)}
@@ -163,13 +188,12 @@ export default function Navbar() {
                     {item.name}
                   </NavLink>
 
-                  {/* Dropdown Toggle */}
                   <button
                     onClick={() => toggleMobileDropdown(item.name)}
-                    className="px-3 rounded-lg hover:bg-white/20"
+                    className="px-3 rounded-lg hover:bg-white/20 transition-transform duration-300"
                   >
                     <ChevronDown
-                      className={`transition-transform ${
+                      className={`transition-transform duration-300 ${
                         mobileDropdowns[item.name] ? "rotate-180" : ""
                       }`}
                     />
@@ -178,7 +202,7 @@ export default function Navbar() {
 
                 {mobileDropdowns[item.name] && (
                   <div className="pl-4 mt-2 border-l border-white/20">
-                    {coursesMenu.map((cat) => (
+                    {(item.name === "Courses" ? coursesMenu : careerMenu).map((cat) => (
                       <div key={cat.heading}>
                         <h4 className="text-sm font-semibold mt-2">{cat.heading}</h4>
                         {cat.items.map((c) => (
