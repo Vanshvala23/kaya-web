@@ -126,7 +126,7 @@ const ApplicationModal = ({ isOpen, onClose, jobTitle }) => {
       if (formData.resume) data.append("resume", formData.resume);
 
       // Replace the URL with your backend API endpoint
-      await axios.post("http://localhost:5000/api/career", data, {
+      await axios.post("https://kaya-server.vercel.app/api/career", data, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 

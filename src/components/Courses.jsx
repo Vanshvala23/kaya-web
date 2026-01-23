@@ -142,7 +142,7 @@ const EnquiryModal = ({ isOpen, onClose, type, subject }) => {
       let res;
       if (type === "syllabus") {
         // Syllabus API
-        res = await axios.post("http://localhost:5000/api/syllabus", {
+        res = await axios.post("https://kaya-server.vercel.app/api/syllabus", {
           firstName,
           lastName,
           phone,
@@ -151,7 +151,7 @@ const EnquiryModal = ({ isOpen, onClose, type, subject }) => {
         });
       } else {
         // General Enquiry API
-        res = await axios.post("http://localhost:5000/api/enquiry", {
+        res = await axios.post("https://kaya-server.vercel.app/api/enquiry", {
           firstName,
           lastName,
           phone,
