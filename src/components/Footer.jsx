@@ -154,7 +154,7 @@ export default function Footer() {
       {/* ASK AI BUTTON */}
       <button
         onClick={() => setChatOpen(true)}
-        className={`fixed bottom-6 right-6 px-4 h-14 rounded-full bg-[#631529] text-white
+        className={`fixed bottom-6 right-6 px-4 h-14 rounded-full bg-[#8b2e3e] text-white
           flex items-center justify-center gap-2 transition-all duration-300
           hover:bg-[#4a101f] hover:scale-110 hover:shadow-[0_0_25px_rgba(99,21,41,0.6)]
           ${showArrow ? "opacity-100" : "opacity-0 pointer-events-none"}`}
