@@ -83,13 +83,15 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
+    >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <NavLink to="/" className={`text-2xl font-bold ${textColor}`}>
           PureRevive
         </NavLink>
 
-        {/* ================= DESKTOP MENU ================= */}
+        {/* DESKTOP MENU */}
         <ul className="hidden md:flex space-x-6 font-medium">
           {navItems.map((item) => (
             <li key={item.name} className="relative group">
@@ -107,7 +109,7 @@ export default function Navbar() {
                 {item.dropdown && <ChevronDown size={16} />}
               </NavLink>
 
-              {/* ================= DESKTOP COURSES DROPDOWN ================= */}
+              {/* DESKTOP DROPDOWNS */}
               {item.name === "Courses" && (
                 <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-2 min-w-[600px] bg-white text-[#631529] rounded-xl shadow-xl p-4 gap-4">
                   {coursesMenu.map((cat) => (
@@ -127,7 +129,6 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* ================= DESKTOP CAREER DROPDOWN ================= */}
               {item.name === "Career" && (
                 <div className="absolute left-0 top-full mt-2 hidden group-hover:grid grid-cols-1 min-w-[300px] bg-white text-[#631529] rounded-xl shadow-xl p-4 gap-2">
                   {careerMenu.map((cat) => (
@@ -150,36 +151,37 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ================= MOBILE BUTTON ================= */}
+        {/* MOBILE MENU BUTTON */}
         <button className={`md:hidden ${textColor}`} onClick={() => setMobileOpen(true)}>
           <Menu size={26} />
         </button>
       </nav>
 
-      {/* ================= OVERLAY ================= */}
+      {/* MOBILE OVERLAY */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 ${mobileOpen ? "block" : "hidden"}`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          mobileOpen ? "opacity-100 block" : "opacity-0 hidden"
+        }`}
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* ================= MOBILE MENU ================= */}
+      {/* MOBILE SIDEBAR */}
       <aside
-        className={`fixed top-0 right-0 h-full w-72 bg-[#631529] text-white z-50 transition-transform duration-300 ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-72 bg-[#631529] text-white z-50 transition-transform duration-300
+          ${mobileOpen ? "translate-x-0" : "translate-x-full"} flex flex-col`}
       >
-        <div className="flex justify-between items-center px-6 py-4 border-b border-white/20">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-white/20 flex-shrink-0">
           <span className="font-semibold text-lg">Menu</span>
           <button onClick={() => setMobileOpen(false)}>
             <X size={24} />
           </button>
         </div>
 
-        <div className="px-6 py-6 space-y-3">
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-3">
           {navItems.map((item) =>
             item.dropdown ? (
               <div key={item.name}>
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-center">
                   <NavLink
                     to={item.path}
                     onClick={() => setMobileOpen(false)}
@@ -187,7 +189,6 @@ export default function Navbar() {
                   >
                     {item.name}
                   </NavLink>
-
                   <button
                     onClick={() => toggleMobileDropdown(item.name)}
                     className="px-3 rounded-lg hover:bg-white/20 transition-transform duration-300"
