@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowUpRight, X, Upload, FileText, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowUpRight, X, CheckCircle2, Loader2 } from "lucide-react";
 import aboutImage from "../assets/aboutus1.jpg";
 import historyImage from "../assets/history.jpg";
 import visionImage from "../assets/vision.jpg";
@@ -10,13 +10,13 @@ import axios from "axios";
 export default function AboutUs() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [step, setStep] = useState(1); // 1: Form, 2: Success
+  const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    course: ""
+    course: "",
   });
 
   useEffect(() => {
@@ -25,30 +25,36 @@ export default function AboutUs() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const data = new FormData();
-      data.append("name", formData.name);
-      data.append("email", formData.email);
-      data.append("phone", formData.phone);
-      data.append("course", formData.course);
+    const toastId = toast.loading("Submitting...");
 
-      const toastId = toast.loading("Submitting...");
-      await axios.post("https://kaya-server.vercel.app/api/enroll", data, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
+    try {
+      await axios.post(
+        "https://kaya-server.vercel.app/api/enroll",
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          course: formData.course,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       setStep(2);
       toast.success("Enrollment submitted successfully!", { id: toastId });
-    } catch (err) {
-      console.error(err);
-      toast.error("Submission failed. Please try again.");
+    } catch (error) {
+      console.error(error);
+      toast.error("Submission failed. Please try again.", { id: toastId });
     } finally {
       setIsSubmitting(false);
     }
@@ -57,8 +63,7 @@ export default function AboutUs() {
   const closeModal = () => {
     setIsModalOpen(false);
     setStep(1);
-    setFormData({ name: "", email: "", phone: "", course: ""});
-    setFileName("");
+    setFormData({ name: "", email: "", phone: "", course: "" });
   };
 
   return (
@@ -70,150 +75,85 @@ export default function AboutUs() {
 
           {/* LEFT CONTENT */}
           <div className="relative z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-[#631529] leading-snug sm:leading-tight md:leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-[#631529] leading-tight">
               Transforming Beauty and Wellness
               <br />
               Education Since 1999
             </h1>
 
-            <p className="mt-4 sm:mt-6 text-gray-700 leading-relaxed text-sm sm:text-base max-w-xl">
+            <p className="mt-6 text-gray-700 max-w-xl">
               Skilling is the key to a better India where youth will have a safe and
               better future with better career opportunities. With this thought in
               mind, <span className="text-[#631529] font-medium">PureRevive International</span> was
-              conceptualised in 1999. We offer skill-based courses to empower youth!
+              conceptualised in 1999.
             </p>
 
-            <p className="mt-3 sm:mt-4 text-gray-700 leading-relaxed text-sm sm:text-base max-w-xl">
-              Since 1999, we’ve empowered more than{" "}
-              <span className="text-[#631529] font-semibold">1 Lakh+</span> aspiring
-              individuals with exceptional skills. With over{" "}
-              <span className="text-[#631529] font-semibold">110 academies</span> across
-              22 Indian states and Canada, we are the most recognised name in
-              skilling.
-            </p>
-
-            {/* CTA CARD */}
-            <div className="mt-8 sm:mt-10 bg-[#ffebe7] p-6 sm:p-8 rounded-2xl shadow-lg max-w-xl transition-all hover:shadow-2xl">
-              <h3 className="text-[#631529] font-serif text-lg sm:text-xl mb-4 sm:mb-6">
+            <div className="mt-10 bg-[#ffebe7] p-8 rounded-2xl shadow-lg max-w-xl">
+              <h3 className="text-[#631529] font-serif text-xl mb-6">
                 Join a state-of-art Beauty College
               </h3>
 
-              <div className="flex flex-wrap gap-3 sm:gap-4">
-                <button 
-                  className="flex items-center gap-2 bg-[#631529] text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium shadow-md hover:bg-white hover:text-[#631529] hover:shadow-xl transition-all duration-300"
+              <div className="flex gap-4 flex-wrap">
+                <button
                   onClick={() => setIsModalOpen(true)}
+                  className="flex items-center gap-2 bg-[#631529] text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#631529] transition"
                 >
                   Get Enrolled
-                  <ArrowUpRight className="text-lg" />
+                  <ArrowUpRight />
                 </button>
 
-                <button 
-                  className="flex items-center gap-2 border border-[#631529] text-[#631529] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium bg-[#ffebe7] hover:bg-white hover:text-[#631529] shadow-md hover:shadow-xl transition-all duration-300"
-                  onClick={() => navigate('/courses')}
+                <button
+                  onClick={() => navigate("/courses")}
+                  className="flex items-center gap-2 border border-[#631529] text-[#631529] px-6 py-3 rounded-full hover:bg-white transition"
                 >
                   Explore Our Courses
-                  <ArrowUpRight className="text-lg" />
+                  <ArrowUpRight />
                 </button>
               </div>
             </div>
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="relative w-full h-64 sm:h-80 md:h-[480px] lg:h-[520px] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 hidden md:block">
+          <div className="hidden md:block relative h-[520px] rounded-xl overflow-hidden shadow-lg">
             <img
               src={aboutImage}
               alt="Beauty Academy"
-              className="absolute top-0 left-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute top-4 left-4 w-10 sm:w-12 h-10 sm:h-12 bg-[#fde7e3] rounded-full mix-blend-multiply"></div>
           </div>
-
         </div>
       </section>
 
-      {/* ===== Modal Form ===== */}
+      {/* ===== Modal ===== */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-t-3xl md:rounded-3xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl scale-100 transition-all flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl">
 
-            {/* Header */}
-            <div className="bg-[#631529] p-5 md:p-6 text-white flex justify-between items-center sticky top-0 z-10">
-              <h3 className="text-lg md:text-xl font-serif font-bold">Get Enrolled</h3>
-              <button onClick={closeModal} className="bg-white/20 p-2 rounded-full hover:bg-white/30 flex-shrink-0">
-                <X size={20} />
+            <div className="bg-[#631529] p-6 text-white flex justify-between items-center">
+              <h3 className="text-xl font-bold">Get Enrolled</h3>
+              <button onClick={closeModal}>
+                <X />
               </button>
             </div>
 
-            {/* Content */}
-            <div className="p-5 md:p-8">
+            <div className="p-8">
               {step === 1 ? (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Full Name</label>
-                    <input
-                      required
-                      type="text"
-                      name="fullName"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]"
-                    />
-                  </div>
+                  <input name="name" value={formData.name} onChange={handleInputChange} placeholder="Full Name" required className="w-full p-3 border rounded-xl" />
+                  <input name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="Email" required className="w-full p-3 border rounded-xl" />
+                  <input name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Phone" required className="w-full p-3 border rounded-xl" />
+                  <textarea name="course" value={formData.course} onChange={handleInputChange} placeholder="Course Interested In" required className="w-full p-3 border rounded-xl" />
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Email Address</label>
-                    <input
-                      required
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Phone Number</label>
-                    <input
-                      required
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Course Interested In</label>
-                    <textarea
-                      required
-                      name="course"
-                      value={formData.course}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]"
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#631529] text-white font-bold py-4 rounded-xl hover:bg-[#4a101f] transition shadow-lg flex items-center justify-center gap-2 mt-4 disabled:opacity-70 active:scale-95 transform"
-                  >
-                    {isSubmitting ? <><Loader2 className="animate-spin" /> Submitting...</> : "Submit Enrollment"}
+                  <button disabled={isSubmitting} className="w-full bg-[#631529] text-white py-4 rounded-xl">
+                    {isSubmitting ? <Loader2 className="animate-spin mx-auto" /> : "Submit Enrollment"}
                   </button>
                 </form>
               ) : (
-                <div className="text-center py-8">
-                  <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
-                    <CheckCircle2 size={40} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Enrollment Sent!</h3>
-                  <p className="text-gray-600 mb-8 px-4">
-                    Thanks for enrolling at PureRevive. Our team will review your submission and contact you shortly.
-                  </p>
-                  <button onClick={closeModal} className="text-[#631529] font-bold hover:underline py-2">
-                    Close Window
+                <div className="text-center py-10">
+                  <CheckCircle2 size={48} className="mx-auto text-green-600" />
+                  <h3 className="mt-4 text-xl font-bold">Enrollment Sent!</h3>
+                  <button onClick={closeModal} className="mt-6 text-[#631529] font-bold">
+                    Close
                   </button>
                 </div>
               )}
