@@ -97,7 +97,7 @@ export default function HeroSlider() {
   style={{ objectPosition: slide.position }}
   className="
     absolute inset-0 w-full h-full object-cover
-    brightness-130 contrast-120 saturate-180
+    brightness-175 contrast-200 saturate-200
     sm:brightness-175 sm:contrast-200 sm:saturate-200
   "
 />
