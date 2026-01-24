@@ -92,12 +92,15 @@ export default function HeroSlider() {
         {slides.map((slide, i) => (
           <div key={i} className="min-w-full relative h-full">
             <img
-              src={slide.image}
-              alt={slide.title}
-              style={{ objectPosition: slide.position }}
-              className="absolute inset-0 w-full h-full object-cover brightness-130 contrast-125 saturate-200"
-            />
-
+  src={slide.image}
+  alt={slide.title}
+  style={{ objectPosition: slide.position }}
+  className="
+    absolute inset-0 w-full h-full object-cover
+    brightness-130 contrast-120 saturate-180
+    sm:brightness-175 sm:contrast-200 sm:saturate-200
+  "
+/>
             <div className="absolute inset-0 bg-black/50 sm:bg-gradient-to-r sm:from-black/70 sm:via-black/40 sm:to-black/10" />
 
             <div className="relative z-10 h-full flex items-end pb-10 sm:items-center sm:pb-0">
