@@ -23,6 +23,8 @@ import centerImgMohali from "../assets/c1.jpg";
 import centerImgChandigarh from "../assets/c3.jpg"; 
 import centerImgDelhi from "../assets/c2.jpg"; 
 import centerImgMumbai from "../assets/c4.jpg";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 //  MOCK DATA 
 const centersData = [
@@ -116,32 +118,143 @@ const centersData = [
 // COMPONENTS 
 
 const ScheduleVisitModal = ({ isOpen, onClose, centerName }) => {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    visitDate: "",
+    visitTime: ""
+  });
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+    if (!form.name || !form.phone || !form.visitDate || !form.visitTime) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    if (!/^[0-9]{10}$/.test(form.phone)) {
+      toast.error("Enter a valid 10-digit phone number");
+      return;
+    }
+
+    const toastId = toast.loading("Booking visit...");
+
+    try {
+      setLoading(true);
+
+      await axios.post(
+        "https://kaya-server.vercel.app/api/booking",
+        {
+          name: form.name,
+          phone: form.phone,
+          visitDate: form.visitDate,
+          visitTime: form.visitTime,
+          centerName
+        },
+        { timeout: 10000 }
+      );
+
+      toast.success("Visit booked successfully!", { id: toastId });
+
+      setForm({
+        name: "",
+        phone: "",
+        visitDate: "",
+        visitTime: ""
+      });
+
+      onClose();
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to book visit. Please try again.",
+        { id: toastId }
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl scale-100 transition-all">
-        <div className="bg-[#631529] p-5 md:p-6 text-white flex justify-between items-center">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+
+        {/* HEADER */}
+        <div className="bg-[#631529] p-5 text-white flex justify-between items-center">
           <div>
-            <h3 className="text-lg md:text-xl font-serif font-bold">Book a Center Tour</h3>
-            <p className="text-white/80 text-xs mt-1 max-w-[200px] truncate">Visiting: {centerName}</p>
+            <h3 className="text-lg font-serif font-bold">Book a Center Tour</h3>
+            <p className="text-xs opacity-80 truncate">
+              Visiting: {centerName}
+            </p>
           </div>
-          <button onClick={onClose} className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition flex-shrink-0"><X size={18} /></button>
+          <button onClick={onClose} className="bg-white/20 p-2 rounded-full">
+            <X size={18} />
+          </button>
         </div>
-        <div className="p-5 md:p-6 space-y-4">
-          <input type="text" placeholder="Your Name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
-          <input type="tel" placeholder="Phone Number" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] focus:ring-1 focus:ring-[#631529]" />
+
+        {/* BODY */}
+        <div className="p-5 space-y-4">
+
+          <input
+            value={centerName}
+            readOnly
+            className="w-full bg-gray-100 border border-gray-300 px-4 py-3 rounded-xl font-semibold text-gray-600 cursor-not-allowed"
+          />
+
+          <input
+            name="name"
+            placeholder="Your Name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full border rounded-xl px-4 py-3"
+          />
+
+          <input
+            name="phone"
+            placeholder="Phone Number"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full border rounded-xl px-4 py-3"
+          />
+
           <div className="grid grid-cols-2 gap-4">
-            <input type="date" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] text-gray-500" />
-            <input type="time" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-[#631529] text-gray-500" />
+            <input
+              type="date"
+              name="visitDate"
+              value={form.visitDate}
+              onChange={handleChange}
+              className="border rounded-xl px-4 py-3"
+            />
+            <input
+              type="time"
+              name="visitTime"
+              value={form.visitTime}
+              onChange={handleChange}
+              className="border rounded-xl px-4 py-3"
+            />
           </div>
-          <button className="w-full bg-[#631529] text-white font-bold py-3.5 rounded-xl hover:bg-[#4a101f] transition shadow-lg flex items-center justify-center gap-2 transform active:scale-95">
-            Confirm Visit <CheckCircle2 size={18} />
+
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="w-full bg-[#631529] text-white py-3 rounded-xl font-bold disabled:opacity-60"
+          >
+            {loading ? "Booking..." : "Confirm Visit"}
           </button>
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 export default function LocationPage() {
   const [selectedState, setSelectedState] = useState("All");
