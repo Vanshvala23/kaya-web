@@ -46,7 +46,7 @@ function App() {
         <Route path="/courses/hair" element={<HairCourse/>}/>
         <Route path="/courses/courses-on-emi" element={<CourseOnEMI/>}/>
         <Route path="/courses/combo-cosmetology" element={<ComboCosmetology/>}/>
-        <Route path="/courses/international-certification" element={<Certificate/>}/>
+        <Route path="/courses/international" element={<Certificate/>}/>
         <Route path="/courses/korean-makeup" element={<KoreanMakeup/>}/>
         <Route path="/courses/makeup" element={<MakeupCourse/>}/>
         <Route path="/courses/master-educator" element={<MasterEducation/>}/>
