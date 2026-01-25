@@ -166,7 +166,7 @@ export default function AestheticCoursesPage() {
   const faqs = [
     { q: "What is the duration of these courses?", a: "Duration varies from 4 weeks for certificate courses to 6 months for advanced diplomas." },
     { q: "Do I need a medical background?", a: "No, our courses are designed to take you from beginner to expert level, covering anatomy and physiology basics." },
-    { q: "Is the certification valid internationally?", a: "Yes, Orane certification is recognized globally, and we prepare you for CIDESCO/CIBTAC exams." },
+    { q: "Is the certification valid internationally?", a: "Yes, PureReviev certification is recognized globally, and we prepare you for CIDESCO/CIBTAC exams." },
     { q: "Do you provide placement assistance?", a: "Absolutely. We have a 100% placement support record with top clinics and luxury spas." }
   ];
 
@@ -253,7 +253,7 @@ export default function AestheticCoursesPage() {
               <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-green-600 flex-shrink-0" /> 
-                  Orane International Diploma
+                  PureReviev International Diploma
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-green-600 flex-shrink-0" /> 

@@ -46,7 +46,7 @@ const nailSpecifics = {
   ],
   testimonials: [
     { name: "Sara K.", role: "Freelance Nail Tech", text: "The drill machine training was a game changer. I reduced my service time by 30% and increased my income." },
-    { name: "Tina L.", role: "Salon Owner", text: "Orane's 3D art module is the best. My clients specifically book me for the flower designs I learned here." }
+    { name: "Tina L.", role: "Salon Owner", text: "PureReviev's 3D art module is the best. My clients specifically book me for the flower designs I learned here." }
   ],
   gallery: [
     "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=600",

@@ -39,7 +39,7 @@ const internationalSpecifics = {
     }
   ],
   migrationSteps: [
-    { step: "01", title: "Diploma Level 3/4", desc: "Complete your advanced course at Orane." },
+    { step: "01", title: "Diploma Level 3/4", desc: "Complete your advanced course at PureReviev." },
     { step: "02", title: "Intl. Exam", desc: "Clear CIBTAC/CIDESCO practicals (External Examiner)." },
     { step: "03", title: "Portfolio", desc: "Build a digital portfolio of your case studies." },
     { step: "04", title: "Placement", desc: "Apply to our global partners (Steiner/Onboard Spa)." },

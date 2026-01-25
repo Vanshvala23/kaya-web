@@ -35,7 +35,7 @@ const beautySpecifics = {
     { name: "Brush Set", desc: "Facial application brushes" }
   ],
   testimonials: [
-    { name: "Anjali M.", role: "Spa Manager, Taj", text: "The practical training in facial electricals gave me an edge over others. Orane's diploma is truly global." },
+    { name: "Anjali M.", role: "Spa Manager, Taj", text: "The practical training in facial electricals gave me an edge over others. PureReviev's diploma is truly global." },
     { name: "Rohit K.", role: "Freelance Therapist", text: "I started my own home salon service immediately after the course. The kit provided was enough to start!" }
   ],
   partners: [
