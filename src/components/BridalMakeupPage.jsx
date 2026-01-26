@@ -72,7 +72,8 @@ export default function BridalMakeupPage() {
       <section className="relative h-[75vh] md:h-[90vh] flex items-center text-white">
         <img
           src={bridal1}
-          className="absolute inset-0 w-full h-full object-cover object-[30%_10%] brightness-125 sm:object-[50%_20%]"
+         className="absolute inset-0 w-full h-full object-cover object-center md:object-[30%_10%] brightness-125"
+
           alt="Bridal"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#7b1e3a]/90 to-transparent"></div>
