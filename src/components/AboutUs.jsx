@@ -234,7 +234,7 @@ export default function AboutUs() {
       <section className="relative bg-[#631529] py-20 sm:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start gap-12 relative z-10">
           <div className="w-full md:w-1/2 h-80 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-            <img src={visionImage} alt="Vision & Mission" className="w-full h-full object-cover rounded-2xl" />
+            <img src={visionImage} alt="Vision & Mission" className="w-full h-full object-cover rounded-2xl object-[50%_5%]" />
           </div>
 
           <div className="w-full md:w-1/2 text-white flex flex-col justify-center gap-6">

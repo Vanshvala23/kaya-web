@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MapPin, Phone, Mail, ArrowUp, MessageSquare, X } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUp, MessageSquare, X,Facebook,Instagram } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 export default function Footer() {
@@ -38,7 +38,7 @@ export default function Footer() {
               { label: "Blog", path: "/blog" },
               { label: "About Us", path: "/about-us" },
               { label: "Contact Us", path: "/contact" },
-              { label: "Certificate Tracking", path: "/certificate-tracking" },
+              // { label: "Certificate Tracking", path: "/certificate-tracking" },
             ].map(link => (
               <li key={link.label}>
                 <NavLink to={link.path} className="hover:text-[#631529] transition">
@@ -56,9 +56,9 @@ export default function Footer() {
             {[
               { label: "Aesthetic", path: "/courses/aesthetic" },
               { label: "Beauty", path: "/courses/beauty" },
-              { label: "Combo Cosmetology", path: "/courses/cosmetology" },
+              { label: "Combo Cosmetology", path: "/courses/combo-cosmetology" },
               { label: "Spa", path: "/courses/spa" },
-              { label: "Courses-on-EMI", path: "/emi" },
+              { label: "Courses-on-EMI", path: "/courses/courses-on-emi" },
               { label: "View More", path: "/courses" },
             ].map(course => (
               <li key={course.label}>
@@ -70,23 +70,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* OFFICE CANADA */}
-        <div>
-          <h4 className="font-semibold text-lg mb-6">🇨🇦 Office Canada</h4>
-          <ul className="space-y-4 text-sm">
-            <li className="flex gap-3">
-              <MapPin size={18} />
-              <span>
-                312-17750, 65A Ave, Surrey, BC, V3S 5N4
-                <br />
-                <span className="text-xs text-gray-500">(PTIRU Approved)</span>
-              </span>
-            </li>
-            <li className="flex gap-3"><Phone size={18} /> +1 (604)-123-456</li>
-            <li className="flex gap-3"><Mail size={18} /> info@PureRevive.ca</li>
-          </ul>
-        </div>
-
         {/* OFFICE INDIA */}
         <div>
           <h4 className="font-semibold text-lg mb-6">🇮🇳 Office India</h4>
@@ -94,11 +77,12 @@ export default function Footer() {
             <li className="flex gap-3">
               <MapPin size={18} />
               <span>
-                SCO 88–92 Sector 82, JLPL Industrial Area, Airport Road, Punjab 140308
+                Vaishalli International's PURE REVIVE Head Office
+40/6, Karve Rd, near Prime Furnishing, opposite Sonal Hall, Bhonde Colony, Erandwane, Pune, Maharashtra 411004, India
               </span>
             </li>
             <li className="flex gap-3"><Mail size={18} /> info@PureRevive.com</li>
-            <li className="flex gap-3"><Phone size={18} /> +91 123 456 7890</li>
+            <li className="flex gap-3"><Phone size={18} /> +91 9225527523</li>
           </ul>
         </div>
       </div>
@@ -113,30 +97,37 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-3">
-            {[
-              { name: "Facebook", url: "https://facebook.com" },
-              { name: "X", url: "https://x.com" },
-              { name: "Instagram", url: "https://instagram.com" },
-              { name: "YouTube", url: "https://youtube.com" },
-              { name: "LinkedIn", url: "https://linkedin.com" },
-              { name: "Pinterest", url: "https://pinterest.com" },
-            ].map(s => (
-              <a
-                key={s.name}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
-                  hover:bg-[#631529] hover:text-white transition font-bold"
-              >
-                {s.name[0]}
-              </a>
-            ))}
+            {/* Facebook */}
+            <a
+              href="https://facebook.com/purerevive99"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-[#ffe4e1] text-[#631529]
+                flex items-center justify-center
+                hover:bg-[#631529] hover:text-white
+                transition-all duration-300 hover:scale-110"
+            >
+              <Facebook size={18} />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://instagram.com/purerevive_99"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-[#ffe4e1] text-[#631529]
+                flex items-center justify-center
+                hover:bg-[#631529] hover:text-white
+                transition-all duration-300 hover:scale-110"
+            >
+              <Instagram size={18} />
+            </a>
           </div>
 
+
           <div className="flex gap-4">
-            <NavLink to="/disclaimer" className="hover:text-[#631529]">Disclaimer</NavLink>
-            <NavLink to="/privacy-policy" className="hover:text-[#631529]">Privacy Policy</NavLink>
+            {/* <NavLink to="/disclaimer" className="hover:text-[#631529]">Disclaimer</NavLink>
+            <NavLink to="/privacy-policy" className="hover:text-[#631529]">Privacy Policy</NavLink> */}
           </div>
         </div>
       </div>
