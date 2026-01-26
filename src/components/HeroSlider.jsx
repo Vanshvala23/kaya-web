@@ -15,7 +15,7 @@ const slides = [
     subtitle: "Get Certified in 45 Days",
     meta: ["Course Fee: ₹50,000 Only"],
     button: "Know More",
-    link: "/courses/beauty",
+    link: "/courses/bridal-makeup",
   },
   {
     image: bridal2,
