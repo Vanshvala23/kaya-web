@@ -30,28 +30,28 @@ const departments = [
     icon: GraduationCap,
     name: "Admissions Team",
     desc: "For course details, fees, and enrollment.",
-    phone: "+91 8872 500 500",
+    phone: "+91 9225527523",
     email: "admissions@PureRevive.com"
   },
   {
     icon: Users,
     name: "Student Support",
     desc: "For existing students, exams, and certification.",
-    phone: "+91 8872 500 501",
+    phone: "+91 9225527523",
     email: "support@PureRevive.com"
   },
   {
     icon: Building2,
     name: "Franchise Inquiry",
     desc: "For business partnership opportunities.",
-    phone: "+91 9876 543 210",
+    phone: "+91 9225527523",
     email: "franchise@PureRevive.com"
   },
   {
     icon: Briefcase,
     name: "HR & Careers",
     desc: "For job applications and recruitment.",
-    phone: "0172 500 500",
+    phone: "9225527523",
     email: "hr@PureRevive.com"
   }
 ];
@@ -114,7 +114,7 @@ export default function ContactPage() {
     <>
       {/* FLOATING WHATSAPP */}
       <a 
-        href="https://wa.me/918872500500" 
+        href="https://wa.me/919225527523" 
         target="_blank" 
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-bounce-slow"
@@ -155,9 +155,9 @@ export default function ContactPage() {
           <ContactCard 
             icon={Phone} 
             title="Call Us" 
-            info="+91 8872 500 500" 
+            info="+91 92255 27523" 
             subInfo="Mon-Sat from 9am to 7pm"
-            action="tel:+918872500500"
+            action="tel:+919225527523"
             actionLabel="Call Now"
           />
           <ContactCard 
@@ -171,9 +171,9 @@ export default function ContactPage() {
           <ContactCard 
             icon={MapPin} 
             title="Head Office" 
-            info="Mohali, Punjab" 
-            subInfo="SCO 88-92, Sector 82, JLPL Area"
-            action="https://maps.google.com"
+            info="Pune, Maharashtra" 
+            subInfo="Visit us at our main center"
+            action="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.3765014616824!2d73.83081497102579!3d18.511880630964033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf3762a4152f%3A0x292def8b661ffde9!2sVaishalli%20International&#39;s%20PURE%20REVIVE!5e0!3m2!1sen!2s!4v1769419476366!5m2!1sen!2s"
             actionLabel="Get Directions"
           />
         </div>
@@ -348,21 +348,21 @@ export default function ContactPage() {
               <div className="bg-white rounded-3xl overflow-hidden h-80 lg:h-96 shadow-sm border border-gray-200 mb-8 relative group">
                 {/* Embed Google Map Iframe */}
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.347572765366!2d76.7038!3d30.6758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fe8d61741d401%3A0x6097892336332145!2sPureRevive%20International%20Head%20Office!5e0!3m2!1sen!2sin!4v1625637289123!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.3765014616824!2d73.83081497102579!3d18.511880630964033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf3762a4152f%3A0x292def8b661ffde9!2sVaishalli%20International&#39;s%20PURE%20REVIVE!5e0!3m2!1sen!2s!4v1769419476366!5m2!1sen!2s" 
                   width="100%" 
                   height="100%" 
                   style={{border:0}} 
                   allowFullScreen="" 
                   loading="lazy"
                   title="PureRevive Head Office Map"
-                  className="grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="transition-all duration-700"
                 ></iframe>
                 
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg flex items-start gap-3">
                   <MapPin className="text-[#631529] shrink-0 mt-1" size={20} />
                   <div>
-                    <h4 className="font-bold text-gray-900 text-sm">PureRevive International Head Office</h4>
-                    <p className="text-xs text-gray-600 mt-1 leading-snug">SCO 88-92, Sector 82, JLPL Industrial Area, Mohali, Punjab 140308</p>
+                    <h4 className="font-bold text-gray-900 text-sm">Vaishalli International's PURE REVIVE Head Office</h4>
+                    <p className="text-xs text-gray-600 mt-1 leading-snug">40/6, Karve Rd, near Prime Furnishing, opposite Sonal Hall, Bhonde Colony, Erandwane, Pune, Maharashtra 411004, India</p>
                   </div>
                 </div>
               </div>
@@ -372,8 +372,8 @@ export default function ContactPage() {
                 <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Connect With Us</h3>
                 <p className="text-gray-500 mb-6 text-sm">Follow our social media handles for daily updates, tips, and success stories.</p>
                 <div className="flex justify-center gap-4">
-                  <SocialButton icon={Facebook} href="#" color="hover:bg-[#1877F2] hover:border-[#1877F2]" />
-                  <SocialButton icon={Instagram} href="#" color="hover:bg-[#E4405F] hover:border-[#E4405F]" />
+                  <SocialButton icon={Facebook} href="https://www.facebook.com/purerevive99" color="hover:bg-[#1877F2] hover:border-[#1877F2]" />
+                  <SocialButton icon={Instagram} href="https://www.instagram.com/purerevive_99" color="hover:bg-[#E4405F] hover:border-[#E4405F]" />
                   <SocialButton icon={Linkedin} href="#" color="hover:bg-[#0A66C2] hover:border-[#0A66C2]" />
                   <SocialButton icon={Youtube} href="#" color="hover:bg-[#FF0000] hover:border-[#FF0000]" />
                 </div>
@@ -399,7 +399,7 @@ export default function ContactPage() {
               <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-bold">
                  <a href="mailto:grievance@PureRevive.com" className="text-red-600 hover:underline">grievance@PureRevive.com</a>
                  <span className="text-gray-300">|</span>
-                 <span className="text-gray-700">+91 1234 567 890</span>
+                 <span className="text-gray-700">+91 7219573502</span>
               </div>
             </div>
             <button className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition shadow-lg shrink-0">
