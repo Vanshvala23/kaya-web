@@ -72,7 +72,7 @@ export default function BridalMakeupPage() {
       <section className="relative h-[75vh] md:h-[90vh] flex items-center text-white">
         <img
           src={bridal1}
-         className="absolute inset-0 w-full h-full object-cover object-center sm:object-[80%_30%] brightness-125"
+         className="absolute inset-0 w-full h-full object-cover object-center md:object-[80%_30%] brightness-125"
 
           alt="Bridal"
         />
