@@ -132,7 +132,7 @@ export default function KoreanMakeupPage() {
       {/* HERO SECTION */}
       <section className="relative h-[90vh] flex items-center justify-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&q=80&w=1920" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&q=80&w=1920" className="w-full h-full object-cover object-[50%_45%] " />
           <div className="absolute inset-0 bg-gradient-to-r from-pink-900/90 via-purple-900/40 to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20">
