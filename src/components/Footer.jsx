@@ -141,61 +141,6 @@ export default function Footer() {
       >
         <ArrowUp size={20} />
       </button>
-
-      {/* ASK AI BUTTON */}
-      <button
-        onClick={() => setChatOpen(true)}
-        className={`fixed bottom-6 right-6 px-4 h-14 rounded-full bg-[#8b2e3e] text-white
-          flex items-center justify-center gap-2 transition-all duration-300
-          hover:bg-[#4a101f] hover:scale-110 hover:shadow-[0_0_25px_rgba(99,21,41,0.6)]
-          ${showArrow ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-      >
-        <MessageSquare size={20} />
-        <span className="font-medium">Ask AI</span>
-      </button>
-
-      {/* AI CHAT BOX MODAL */}
-      {chatOpen && (
-        <div className="fixed bottom-24 right-6 w-80 h-96 bg-white border rounded-xl shadow-lg flex flex-col overflow-hidden z-50">
-          {/* Header */}
-          <div className="bg-[#631529] text-white flex justify-between items-center px-4 py-2">
-            <span>AI Chat</span>
-            <button onClick={() => setChatOpen(false)}><X /></button>
-          </div>
-
-          {/* Messages */}
-          <div className="flex-1 p-2 overflow-y-auto space-y-2">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`px-2 py-1 rounded-lg ${
-                  msg.sender === "user" ? "bg-[#8b2e3e] text-white self-end" : "bg-gray-200 self-start text-gray-800"
-                } max-w-[75%]`}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </div>
-
-          {/* Input */}
-          <div className="p-2 border-t flex gap-2">
-            <input
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && sendMessage()}
-              className="flex-1 border rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#631529]"
-              placeholder="Type a message..."
-            />
-            <button
-              onClick={sendMessage}
-              className="bg-[#631529] text-white px-4 py-1 rounded-lg hover:bg-[#4a101f]"
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      )}
     </footer>
   );
 }
