@@ -267,7 +267,7 @@ export default function FranchisePage() {
               Apply Now
             </button>
             <a
-              href="tel:+918872500500"
+              href="tel:+919225527523"
               className="bg-gray-100 p-3 rounded-full text-[#631529]"
             >
               <Phone />
