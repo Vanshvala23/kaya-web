@@ -4,6 +4,7 @@ import {
   Clock, ChevronDown, Calendar, Download, X, Image as ImageIcon, 
   BookOpen, Globe, CheckCircle2, Briefcase, Calculator
 } from "lucide-react";
+import presidentImg from "../assets/image.png";
 
 // DATA 
 const facultyProfile = {
@@ -11,7 +12,7 @@ const facultyProfile = {
   designation: "International Aesthetic Educator | CIDESCO Trainer",
   experience: "30+ Years",
   location: "India",
-  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+  image: presidentImg,
   summary: "Highly accomplished international aesthetic educator with over 30 years of experience in beauty therapy, skin aesthetics, wellness, and advanced cosmetology education. Holder of multiple globally recognized diplomas including CIDESCO, CIBTAC, and City & Guilds.",
   qualifications: [
     "CIDESCO International Diploma – Aromatherapy",
