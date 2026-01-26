@@ -190,7 +190,7 @@ export default function BridalMakeupPage() {
       {/* MOBILE CTA */}
       <div className="fixed bottom-0 left-0 w-full bg-white p-4 flex gap-4 md:hidden shadow-lg">
         <a
-          href="tel:+918872500500"
+          href="tel:+919225527523"
           className="flex-1 bg-gray-100 py-3 rounded-xl font-bold flex items-center justify-center gap-2"
         >
           <Phone /> Call
