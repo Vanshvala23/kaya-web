@@ -47,6 +47,7 @@ export default function Navbar() {
         { name: "Beauty", path: "/courses/beauty" },
         { name: "Combo Cosmetology", path: "/courses/combo-cosmetology" },
         { name: "Hair", path: "/courses/hair" },
+        { name: "Bridal Makeup", path: "/courses/bridal-makeup" },
         { name: "Korean Makeup", path: "/courses/korean-makeup" },
         { name: "Master Educator Programme", path: "/courses/master-educator" },
         { name: "Nail", path: "/courses/nail" },

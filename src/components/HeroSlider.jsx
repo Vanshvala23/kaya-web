@@ -15,7 +15,7 @@ const slides = [
     subtitle: "Get Certified in 45 Days",
     meta: ["Course Fee: ₹50,000 Only"],
     button: "Know More",
-    link: "/courses/bridal-makeup",
+    link: "/courses/beauty",
   },
   {
     image: bridal2,
@@ -25,7 +25,7 @@ const slides = [
     subtitle: "Master Self Grooming, Eye Lash & Eye Tinting Techniques.",
     meta: ["Duration 93 Hours"],
     button: "Enroll Now",
-    link: "/courses/makeup-artist",
+    link: "/courses/korean-makeup",
   },
   {
     image: bridal3,
