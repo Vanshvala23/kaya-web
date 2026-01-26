@@ -16,6 +16,7 @@ import CourseOnEMI from "./pages/CourseOnEMI";
 import ComboCosmetology from "./pages/ComboCosmetology";
 import Certificate from "./pages/Certificate";
 import KoreanMakeup from "./pages/KoreanMakeup";
+import BridalMakeup from "./pages/BridalMakeup";
 import MakeupCourse from "./pages/MakeupCourse";
 import MasterEducation from "./pages/MasterEducation";
 import Mehndi from "./pages/Mehndi";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/courses/combo-cosmetology" element={<ComboCosmetology/>}/>
         <Route path="/courses/international" element={<Certificate/>}/>
         <Route path="/courses/korean-makeup" element={<KoreanMakeup/>}/>
+        <Route path="/courses/bridal-makeup" element={<BridalMakeup/>}/>
         <Route path="/courses/makeup" element={<MakeupCourse/>}/>
         <Route path="/courses/master-educator" element={<MasterEducation/>}/>
         <Route path="/courses/mehndi" element={<Mehndi/>}/>
