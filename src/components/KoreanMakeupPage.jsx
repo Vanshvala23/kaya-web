@@ -5,13 +5,15 @@ import {
   Heart, Star, CheckCircle2, Package, Phone, ArrowRight,
   TrendingUp, Calculator, Quote, Eye, Gem
 } from "lucide-react";
-
+import axios from "axios";
+import toast from "react-hot-toast";
+import presidentImg from "../assets/image.png";
 // DATA
 
 const facultyProfile = {
   name: "Jouee Patwardhan",
   designation: "International Aesthetic Educator | CIDESCO Trainer",
-  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+  image: presidentImg,
   summary: "With over 30 years of experience, Jouee brings international standards to K-Beauty training. She specializes in advanced skin aesthetics—the foundation of the 'Glass Skin' look.",
   qualifications: ["CIDESCO Diploma", "Media Makeup Expert", "CIBTAC Certification"]
 };
@@ -57,12 +59,31 @@ const BrochureModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSuccess(true); }, 1500);
-  };
+    const toastId=toast.loading("Sending...");
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      phone: e.target[2].value,
+    };
 
+    try {
+      await axios.post(
+        "https://kaya-server.vercel.app/api/leads",
+        formData
+      );
+
+      toast.success("Brochure sent successfully!", { id: toastId });
+      setSuccess(true);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!", { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
       <div className="bg-white rounded-3xl w-full max-w-md relative overflow-hidden shadow-2xl">

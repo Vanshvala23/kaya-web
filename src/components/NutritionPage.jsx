@@ -5,7 +5,8 @@ import {
   Calculator, User, Leaf, Phone, ArrowRight,
   BookOpen, Trophy, Stethoscope, Utensils
 } from "lucide-react";
-
+import axios from "axios";
+import toast from "react-hot-toast";
 // DATA 
 
 const nutritionSpecifics = {
@@ -50,10 +51,30 @@ const ApplicationModal = ({ isOpen, onClose, type }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSuccess(true); }, 1500);
+    const toastId=toast.loading("Sending...");
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      phone: e.target[2].value,
+    };
+
+    try {
+      await axios.post(
+        "https://kaya-server.vercel.app/api/leads",
+        formData
+      );
+
+      toast.success("Brochure sent successfully!", { id: toastId });
+      setSuccess(true);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!", { id: toastId });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isApply = type === "apply";
