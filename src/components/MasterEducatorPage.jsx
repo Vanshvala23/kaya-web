@@ -6,13 +6,14 @@ import {
   TrendingUp, Calculator, Quote, GraduationCap,
   Video, Mic, Layers, Briefcase
 } from "lucide-react";
+import presidentImg from "../assets/image.png";
 
 // DATA 
 
 const facultyProfile = {
   name: "Jouee Patwardhan",
   designation: "Academic Director & Master Trainer",
-  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+  image: presidentImg,
   summary: "With 30+ years of experience, Jouee is the 'Trainer of Trainers'. She has shaped the curriculum for India's top beauty academies and mentored over 5,000 students.",
   qualifications: ["CIDESCO Diploma", "City & Guilds Assessor", "VTCT Level 4 Award"]
 };
