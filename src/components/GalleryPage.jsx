@@ -1,5 +1,13 @@
-import {useState,useEffect,useRef} from "react";
-import {ChevronLeft, ChevronRight,LayoutGrid,Images} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Images,
+  LayoutGrid,
+} from "lucide-react";
+
 //import all certificates from '../assets/certificates/
 import Certificate1 from "../assets/certificates/Certificate(1).jpg"
 import Certificate2 from "../assets/certificates/Certificate(2).jpg"
@@ -131,6 +139,7 @@ export default function GalleryPage() {
   const [view, setView] = useState("carousel");
   const [index, setIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [lightbox, setLightbox] = useState(null);
   const timerRef = useRef(null);
 
   /* ================= RESPONSIVE ================= */
@@ -146,7 +155,7 @@ export default function GalleryPage() {
     return () => window.removeEventListener("resize", resize);
   }, []);
 
-  /* ================= IMAGE SOURCE ================= */
+  /* ================= IMAGES ================= */
   const images =
     category === "all"
       ? Object.values(galleryData).flat()
@@ -156,17 +165,15 @@ export default function GalleryPage() {
 
   /* ================= AUTOSLIDE ================= */
   useEffect(() => {
-    if (view !== "carousel") return;
+    if (view !== "carousel" || images.length <= itemsPerPage) return;
     clearInterval(timerRef.current);
-
     timerRef.current = setInterval(() => {
       setIndex((p) =>
         p + itemsPerPage >= images.length ? 0 : p + itemsPerPage
       );
     }, 4200);
-
     return () => clearInterval(timerRef.current);
-  }, [images.length, itemsPerPage, view]);
+  }, [images.length, itemsPerPage, view, category]);
 
   const next = () =>
     setIndex((p) =>
@@ -180,10 +187,17 @@ export default function GalleryPage() {
         : p - itemsPerPage
     );
 
-  return (
-    <section className="bg-[#fff0f4] pt-28 pb-16">
-      {/* pt-28 FIXES NAVBAR OVERLAP */}
+  /* ================= MAGNETIC HOVER ================= */
+  const magnetic = {
+    whileHover: {
+      scale: 1.05,
+      y: -6,
+    },
+    transition: { type: "spring", stiffness: 200, damping: 15 },
+  };
 
+  return (
+    <section className="bg-gradient-to-br from-[#fff0f4] to-white pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* ================= TITLE ================= */}
@@ -199,13 +213,13 @@ export default function GalleryPage() {
               key={c.key}
               onClick={() => {
                 setIndex(0);
-                setTimeout(() => setCategory(c.key), 120);
+                setCategory(c.key);
               }}
-              className={`px-6 py-2 rounded-full font-semibold transition-all
+              className={`px-6 py-2 rounded-full font-semibold transition-all backdrop-blur
                 ${
                   category === c.key
-                    ? "bg-[#631529] text-white shadow-lg scale-105"
-                    : "bg-white text-[#631529] border border-[#631529]"
+                    ? "bg-[#631529]/90 text-white shadow-lg scale-105"
+                    : "bg-white/60 text-[#631529] border border-[#631529]/30"
                 }`}
             >
               {c.label}
@@ -214,19 +228,19 @@ export default function GalleryPage() {
         </div>
 
         {/* ================= VIEW TOGGLE ================= */}
-        <div className="flex justify-center gap-3 mb-10">
+        <div className="flex justify-center gap-3 mb-12">
           <button
             onClick={() => setView("carousel")}
-            className={`px-5 py-2 rounded-full flex items-center gap-2
-              ${view === "carousel" ? "bg-[#631529] text-white" : "bg-white border"}`}
+            className={`px-5 py-2 rounded-full flex items-center gap-2 backdrop-blur
+              ${view === "carousel" ? "bg-[#631529] text-white" : "bg-white/60 border"}`}
           >
             <Images size={18} /> Carousel
           </button>
 
           <button
             onClick={() => setView("grid")}
-            className={`px-5 py-2 rounded-full flex items-center gap-2
-              ${view === "grid" ? "bg-[#631529] text-white" : "bg-white border"}`}
+            className={`px-5 py-2 rounded-full flex items-center gap-2 backdrop-blur
+              ${view === "grid" ? "bg-[#631529] text-white" : "bg-white/60 border"}`}
           >
             <LayoutGrid size={18} /> Gallery
           </button>
@@ -238,55 +252,92 @@ export default function GalleryPage() {
             <button
               onClick={prev}
               className="absolute left-2 top-1/2 -translate-y-1/2 z-10
-              bg-white p-3 rounded-full shadow
-              hover:bg-[#631529] hover:text-white hover:scale-110 transition"
+              bg-white/70 backdrop-blur p-3 rounded-full shadow hover:scale-110"
             >
               <ChevronLeft />
             </button>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+            <motion.div
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.x < -80) next();
+                if (info.offset.x > 80) prev();
+              }}
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
+            >
               {visible.map((img, i) => (
-                <div
+                <motion.div
                   key={`${index}-${i}`}
-                  className="bg-white p-3 rounded-2xl shadow
-                  animate-slideBlur hover:scale-[1.04] transition"
+                  {...magnetic}
+                  onClick={() => setLightbox(img)}
+                  className="cursor-pointer bg-white/40 backdrop-blur-xl
+                  p-3 rounded-2xl shadow-lg border border-white/30"
                 >
                   <img
                     src={img}
                     alt=""
                     className="h-56 w-full object-contain rounded-xl"
                   />
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <button
               onClick={next}
               className="absolute right-2 top-1/2 -translate-y-1/2 z-10
-              bg-white p-3 rounded-full shadow
-              hover:bg-[#631529] hover:text-white hover:scale-110 transition"
+              bg-white/70 backdrop-blur p-3 rounded-full shadow hover:scale-110"
             >
               <ChevronRight />
             </button>
           </div>
         )}
 
-        {/* ================= MASONRY GRID ================= */}
+        {/* ================= MASONRY ================= */}
         {view === "grid" && (
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-5">
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6">
             {images.map((img, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="mb-5 bg-white p-3 rounded-2xl shadow
-                hover:scale-[1.03] transition"
+                {...magnetic}
+                onClick={() => setLightbox(img)}
+                className="mb-6 cursor-pointer bg-white/40 backdrop-blur-xl
+                p-3 rounded-2xl shadow-lg border border-white/30"
               >
                 <img src={img} alt="" className="rounded-xl w-full" />
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
-
       </div>
+
+      {/* ================= LIGHTBOX ================= */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          >
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-6 right-6 text-white"
+            >
+              <X size={32} />
+            </button>
+
+            <motion.img
+              src={lightbox}
+              alt=""
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              whileHover={{ scale: 1.05 }}
+              className="max-h-[90vh] max-w-[90vw] rounded-xl cursor-grab"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
