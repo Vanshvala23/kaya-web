@@ -35,6 +35,7 @@ export default function Navbar() {
     { name: "Location", path: "/location" },
     { name: "Career", path: "/career", dropdown: true },
     { name: "Blog", path: "/blog" },
+    {name:"Gallery",path:"/gallery"},
     { name: "Contact Us", path: "/contact" },
     { name: "Testimonials", path: "/testimonials" },
   ];
