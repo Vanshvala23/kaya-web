@@ -126,7 +126,6 @@ const categories = [
   { key: "fashion", label: "Fashion" },
   { key: "placements", label: "Placements" },
 ];
-
 export default function GalleryPage() {
   const [category, setCategory] = useState("all");
   const [view, setView] = useState("carousel");
@@ -158,26 +157,37 @@ export default function GalleryPage() {
   /* ================= AUTOSLIDE ================= */
   useEffect(() => {
     if (view !== "carousel") return;
+    clearInterval(timerRef.current);
+
     timerRef.current = setInterval(() => {
-      setIndex((p) => (p + itemsPerPage >= images.length ? 0 : p + itemsPerPage));
-    }, 3500);
+      setIndex((p) =>
+        p + itemsPerPage >= images.length ? 0 : p + itemsPerPage
+      );
+    }, 4200);
+
     return () => clearInterval(timerRef.current);
   }, [images.length, itemsPerPage, view]);
 
   const next = () =>
-    setIndex((p) => (p + itemsPerPage >= images.length ? 0 : p + itemsPerPage));
+    setIndex((p) =>
+      p + itemsPerPage >= images.length ? 0 : p + itemsPerPage
+    );
 
   const prev = () =>
-    setIndex((p) => (p - itemsPerPage < 0 ? Math.max(images.length - itemsPerPage, 0) : p - itemsPerPage));
+    setIndex((p) =>
+      p - itemsPerPage < 0
+        ? Math.max(images.length - itemsPerPage, 0)
+        : p - itemsPerPage
+    );
 
   return (
     <section className="bg-[#fff0f4] pt-28 pb-16">
-      {/* ↑ pt-28 FIXES NAVBAR COLLISION */}
+      {/* pt-28 FIXES NAVBAR OVERLAP */}
 
       <div className="max-w-7xl mx-auto px-4">
 
         {/* ================= TITLE ================= */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-[#631529]">Our Gallery</h2>
           <div className="h-1 w-28 mx-auto bg-gradient-to-r from-[#631529] to-pink-300 mt-3 rounded-full" />
         </div>
@@ -188,13 +198,13 @@ export default function GalleryPage() {
             <button
               key={c.key}
               onClick={() => {
-                setCategory(c.key);
                 setIndex(0);
+                setTimeout(() => setCategory(c.key), 120);
               }}
-              className={`px-6 py-2 rounded-full font-semibold transition
+              className={`px-6 py-2 rounded-full font-semibold transition-all
                 ${
                   category === c.key
-                    ? "bg-[#631529] text-white shadow-lg"
+                    ? "bg-[#631529] text-white shadow-lg scale-105"
                     : "bg-white text-[#631529] border border-[#631529]"
                 }`}
             >
@@ -204,10 +214,10 @@ export default function GalleryPage() {
         </div>
 
         {/* ================= VIEW TOGGLE ================= */}
-        <div className="flex justify-center gap-3 mb-8">
+        <div className="flex justify-center gap-3 mb-10">
           <button
             onClick={() => setView("carousel")}
-            className={`px-5 py-2 rounded-full flex gap-2 items-center
+            className={`px-5 py-2 rounded-full flex items-center gap-2
               ${view === "carousel" ? "bg-[#631529] text-white" : "bg-white border"}`}
           >
             <Images size={18} /> Carousel
@@ -215,7 +225,7 @@ export default function GalleryPage() {
 
           <button
             onClick={() => setView("grid")}
-            className={`px-5 py-2 rounded-full flex gap-2 items-center
+            className={`px-5 py-2 rounded-full flex items-center gap-2
               ${view === "grid" ? "bg-[#631529] text-white" : "bg-white border"}`}
           >
             <LayoutGrid size={18} /> Gallery
@@ -225,29 +235,51 @@ export default function GalleryPage() {
         {/* ================= CAROUSEL ================= */}
         {view === "carousel" && (
           <div className="relative">
-            <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow">
+            <button
+              onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10
+              bg-white p-3 rounded-full shadow
+              hover:bg-[#631529] hover:text-white hover:scale-110 transition"
+            >
               <ChevronLeft />
             </button>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
               {visible.map((img, i) => (
-                <div key={i} className="bg-white p-3 rounded-2xl shadow">
-                  <img src={img} alt="" className="h-56 w-full object-contain rounded-xl" />
+                <div
+                  key={`${index}-${i}`}
+                  className="bg-white p-3 rounded-2xl shadow
+                  animate-slideBlur hover:scale-[1.04] transition"
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    className="h-56 w-full object-contain rounded-xl"
+                  />
                 </div>
               ))}
             </div>
 
-            <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow">
+            <button
+              onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10
+              bg-white p-3 rounded-full shadow
+              hover:bg-[#631529] hover:text-white hover:scale-110 transition"
+            >
               <ChevronRight />
             </button>
           </div>
         )}
 
-        {/* ================= GRID ================= */}
+        {/* ================= MASONRY GRID ================= */}
         {view === "grid" && (
           <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-5">
             {images.map((img, i) => (
-              <div key={i} className="mb-5 bg-white p-3 rounded-2xl shadow">
+              <div
+                key={i}
+                className="mb-5 bg-white p-3 rounded-2xl shadow
+                hover:scale-[1.03] transition"
+              >
                 <img src={img} alt="" className="rounded-xl w-full" />
               </div>
             ))}
