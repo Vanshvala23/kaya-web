@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
+import logo from "../../assets/pure-revive-logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,24 +20,24 @@ export default function Navbar() {
   const navbarBg = scrolled
     ? "bg-[#631529] shadow-lg"
     : isHomePage
-    ? "bg-transparent"
-    : "bg-white shadow";
+      ? "bg-transparent"
+      : "bg-white shadow";
 
   const textColor = scrolled
     ? "text-white"
     : isHomePage
-    ? "text-white"
-    : "text-[#631529]";
+      ? "text-white"
+      : "text-[#631529]";
 
   const navItems = [
-    { name: "About Us", path: "/about-us" },
+    { name: "About", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
     { name: "Franchise", path: "/franchise" },
     { name: "Location", path: "/location" },
     { name: "Career", path: "/career", dropdown: true },
     { name: "Blog", path: "/blog" },
-    {name:"Gallery",path:"/gallery"},
-    { name: "Contact Us", path: "/contact" },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Contact", path: "/contact" },
     { name: "Testimonials", path: "/testimonials" },
   ];
 
@@ -88,22 +89,43 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBg}`}
     >
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <NavLink to="/" className={`text-2xl font-bold ${textColor}`}>
-          PureRevive
+      <nav className="container mx-auto px-4 py-2 flex justify-between items-center">
+        {/* LOGO + BRAND */}
+        <NavLink to="/" className="flex items-center gap-3 py-2">
+          <img
+            src={logo}
+            alt="Pure Revive Logo"
+            className="h-12 w-auto object-contain md:h-14"
+          />
+          <div className="flex flex-col leading-tight">
+            <span className="text-[10px] font-semibold tracking-[0.25em] text-gray-500 uppercase">
+              Vaishalli International's
+            </span>
+            <span className="text-xl md:text-2xl font-black tracking-tight text-[#B8860B] drop-shadow-sm">
+              PURE REVIVE
+            </span>
+            <div className="flex items-center gap-1 text-[9px] font-bold text-gray-700 uppercase tracking-widest border-t border-gray-200 pt-1">
+              <span>Clinic</span>
+              <span className="text-[#B8860B]">•</span>
+              <span>Academy</span>
+              <span className="text-[#B8860B]">•</span>
+              <span>Spalon</span>
+              <span className="text-[#B8860B]">•</span>
+              <span>Studio</span>
+            </div>
+          </div>
         </NavLink>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden md:flex space-x-6 font-medium">
+        <ul className="hidden md:flex space-x-3 font-medium">
           {navItems.map((item) => (
             <li key={item.name} className="relative group">
               <NavLink
                 to={item.path}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 ${
-                    isActive
-                      ? "bg-white text-[#631529] shadow-md shadow-white/50"
-                      : `${textColor} hover:bg-white hover:text-[#631529]`
+                  `px-4 py-2 rounded-lg flex items-center gap-1 transition-all duration-300 ${isActive
+                    ? "bg-white text-[#631529] shadow-md shadow-white/50"
+                    : `${textColor} hover:bg-white hover:text-[#631529]`
                   }`
                 }
               >
@@ -161,9 +183,8 @@ export default function Navbar() {
 
       {/* MOBILE OVERLAY */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 block" : "opacity-0 hidden"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${mobileOpen ? "opacity-100 block" : "opacity-0 hidden"
+          }`}
         onClick={() => setMobileOpen(false)}
       />
 
@@ -196,9 +217,8 @@ export default function Navbar() {
                     className="px-3 rounded-lg hover:bg-white/20 transition-transform duration-300"
                   >
                     <ChevronDown
-                      className={`transition-transform duration-300 ${
-                        mobileDropdowns[item.name] ? "rotate-180" : ""
-                      }`}
+                      className={`transition-transform duration-300 ${mobileDropdowns[item.name] ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                 </div>
