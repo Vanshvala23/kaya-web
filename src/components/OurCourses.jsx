@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import c1 from "../assets/teaching/Teaching(6).jpg";
 import c2 from "../assets/teaching/Teaching(13).jpg";
-import c3 from "../assets/teaching/teaching(4).jpg";
+import c3 from "../assets/teaching/Teaching(4).jpg";
 import c4 from "../assets/teaching/Teaching(18).jpg";
 
 const courses = [
