@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logo from "../../assets/pure-revive-logo.png";
+import logo from "../../assets/pure revive logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,6 +32,7 @@ export default function Navbar() {
   const navItems = [
     { name: "About", path: "/about-us" },
     { name: "Courses", path: "/courses", dropdown: true },
+    {name: "Services", path: "/services"},
     { name: "Franchise", path: "/franchise" },
     { name: "Location", path: "/location" },
     { name: "Career", path: "/career", dropdown: true },
@@ -117,7 +118,7 @@ export default function Navbar() {
         </NavLink>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden md:flex space-x-3 font-medium">
+        <ul className="hidden md:flex space-x-1 font-medium">
           {navItems.map((item) => (
             <li key={item.name} className="relative group">
               <NavLink

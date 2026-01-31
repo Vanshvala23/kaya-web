@@ -2,15 +2,15 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import {useNavigate} from "react-router-dom";
 
-import c1 from "../assets/c1.jpg";
-import c2 from "../assets/c2.jpg";
-import c3 from "../assets/c3.jpg";
-import c4 from "../assets/c4.jpg";
+import c1 from "../assets/teaching/Teaching(6).jpg";
+import c2 from "../assets/teaching/Teaching(13).jpg";
+import c3 from "../assets/teaching/teaching(4).jpg";
+import c4 from "../assets/teaching/Teaching(18).jpg";
 
 const courses = [
   { title: "Body Courses", image: c1 },
   { title: "Combo Cosmetology", image: c2 },
-  { title: "Hair Courses", image: c3 },
+  { title: "Laser Treatment", image: c3 },
   { title: "Makeup Courses", image: c4 },
 ];
 
@@ -98,7 +98,7 @@ export default function OurCourses() {
                   key={i}
                   className="min-w-[300px] sm:min-w-[320px] flex-shrink-0"
                 >
-                  <div className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
+                  <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
                     <img
                       src={course.image}
                       alt={course.title}

@@ -1,4 +1,4 @@
-import image from "../assets/image.jpg";
+import image from "../assets/certificates/Certificate(16).jpg";
 import { ChevronRight } from "lucide-react";
 
 export default function WhoWeAre() {
@@ -17,7 +17,7 @@ export default function WhoWeAre() {
           </h2>
 
           <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-            Orane International is a premium beauty and wellness training
+            Pure Revive is a premium beauty and wellness training
             institute focused on transforming passion into a successful
             profession.
           </p>

@@ -25,6 +25,7 @@ import Nutrition from "./pages/Nutrition";
 import SalonManagement from "./pages/SalonManagement";
 import SpaTherapy from "./pages/SpaTherapy";
 import GalleryPage from "./components/GalleryPage";
+import ServicesPageWrapper from "./pages/ServicesPage";
 import Home from './pages/Home';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/contact" element={<ContactUsPage/>}/>
         <Route path="/blog" element={<BlogPageWrapper/>}/>
         <Route path="/gallery" element={<GalleryPage/>}/>
+        <Route path="/services" element={<ServicesPageWrapper/>}/>
         <Route path="/franchise" element={<FranchisePageWrapper/>}/>
         <Route path="/courses/aesthetic" element={<AestheticCourse/>}/>
         <Route path="/courses/beauty" element={<BeautyCourse/>}/>
